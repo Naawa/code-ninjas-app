@@ -1,0 +1,51 @@
+@import 'buttons.scss';
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    font-family: "Azo Sans", sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    color: #506690;
+    transition: 0.2s;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+
+    body {
+        height: 100%;
+        background-color: #f6f7f8;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+    }
+    
+}
+
+grammarly-desktop-integration {
+    display: none;
+}
+
+::selection {
+    background-color: rgba(48, 85, 119, 0.233);
+}
+
+::placeholder {
+    color: #98a7b4;
+    opacity: 0.8;
+    font-weight: 700;
+}
+
+.show {
+    opacity: 1;
+    scale: 1;
+    transition: 0.4s;
+}
+
+.hidden {
+    opacity: 0;
+    scale: 0;
+}
