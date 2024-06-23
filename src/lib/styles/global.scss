@@ -12,6 +12,10 @@
     transition: 0.2s;
 }
 
+:root{
+    --white: #f0eff8;
+}
+
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -30,12 +34,11 @@ grammarly-desktop-integration {
 }
 
 ::selection {
-    background-color: rgba(48, 85, 119, 0.233);
+    background-color: rgba(236, 231, 231, 0.233);
 }
 
 ::placeholder {
-    color: #98a7b4;
-    opacity: 0.8;
+    color: #9E9E9E;
     font-weight: 700;
 }
 
