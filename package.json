@@ -30,5 +30,9 @@
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write ."
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@supabase/ssr": "^0.3.0",
+    "@supabase/supabase-js": "^2.43.5"
+  }
 }
