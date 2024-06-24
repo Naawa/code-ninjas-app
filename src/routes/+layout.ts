@@ -1,7 +1,14 @@
-import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public'
 import { createBrowserClient, createServerClient, isBrowser, parse } from '@supabase/ssr'
 
-export const load = async ({ fetch, data, depends }) => {
+import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public'
+
+import type { LayoutLoad } from './$types'
+
+export const load: LayoutLoad = async ({ data, depends, fetch }) => {
+  /**
+   * Declare a dependency so the layout can be invalidated, for example, on
+   * session refresh.
+   */
   depends('supabase:auth')
 
   const supabase = isBrowser()
@@ -36,5 +43,9 @@ export const load = async ({ fetch, data, depends }) => {
     data: { session },
   } = await supabase.auth.getSession()
 
-  return { supabase, session }
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  return { session, supabase, user }
 }
