@@ -1,0 +1,35 @@
+input, select, option, textarea {
+    padding: 1.1em;
+    width: 100%;
+    border: none;
+    border-radius: 0.5em;
+    color: #374358;
+    background-color: rgba(237, 241, 243, 0.23);
+    font-weight: 600;
+    appearance: none;
+    font-size: 0.9em;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #000000;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 40px 40px #ffffff;
+}
+
+select {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='grey' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: 45%;
+    background-size: 1.5em 1.5em;
+}
+
+@media (width < 600px) {
+    input, select {
+        font-size: 10px;
+    }
+}

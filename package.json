@@ -33,7 +33,6 @@
   "type": "module",
   "dependencies": {
     "@supabase/ssr": "^0.3.0",
-    "@supabase/supabase-js": "^2.43.5",
-    "supabase": "^1.178.2"
+    "@supabase/supabase-js": "^2.43.5"
   }
 }

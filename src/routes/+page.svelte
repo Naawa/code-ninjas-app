@@ -1,16 +1,6 @@
 <script>
-	import LoginModal from "$lib/components/landing/LoginModal.svelte";
+	import TopBar from "$lib/components/landing/TopBar.svelte";
 </script>
 
 
-<h1>Home Page</h1>
-<div id="login-section">
-	
-<h2>Testing </h2>
-</div>
-
-
-<LoginModal>
-
-	
-</LoginModal>
+<TopBar></TopBar>

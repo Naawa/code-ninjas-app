@@ -1,14 +1,17 @@
+@import 'fonts.scss';
 @import 'buttons.scss';
+@import 'inputs.scss';
+@import 'typography.scss';
 
 *, *::before, *::after {
     box-sizing: border-box;
     outline: none;
     margin: 0;
     padding: 0;
-    font-family: "Azo Sans", sans-serif;
+    font-family: "Azo Sans";
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    color: #506690;
+    color: #0e2937;
     transition: 0.2s;
 }
 
@@ -25,6 +28,7 @@ html {
         background-color: #f6f7f8;
         scroll-behavior: smooth;
         overflow-x: hidden;
+        padding: 1em;
     }
     
 }
@@ -38,17 +42,6 @@ grammarly-desktop-integration {
 }
 
 ::placeholder {
-    color: #9E9E9E;
+    color: #798286;
     font-weight: 700;
-}
-
-.show {
-    opacity: 1;
-    scale: 1;
-    transition: 0.4s;
-}
-
-.hidden {
-    opacity: 0;
-    scale: 0;
 }

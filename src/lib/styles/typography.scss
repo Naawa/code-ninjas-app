@@ -1,0 +1,84 @@
+html {
+    font-size: clamp(16px, 0.8vw, 1vh);
+}
+
+@media (width < 600px) {
+    html {
+        font-size: clamp(10px, 1.6vw, 1.6vh);
+    }
+}
+
+@media (width < 800px) {
+    html {
+        font-size: clamp(14px, 1.6vw, 1.6vh);
+    }
+}
+
+@media (width > 2000px) {
+    html {
+        font-size: clamp(24px, 1.6vw, 1.6vh);
+    }
+}
+
+h1 {font-size: 2.442rem; /* 39.04px */}
+
+h2 {font-size: 1.954rem; /* 31.2px */}
+
+h3 {font-size: 1.563rem; /* 24.96px */}
+
+h4 {font-size: 1.250rem; /* 20px */}
+
+h5 {font-size: 1.000rem; /* 16px */}
+
+small {font-size: 0.640rem; /* 10.24px */}
+
+h1, h2, h3, h4, h5, h6, b {
+    font-family: 'Azo Sans Bk';
+    color: #0e2937;
+    line-height: 1;
+}
+
+p {
+    max-width: 30em;
+}
+
+a {
+    text-decoration: none;
+    padding: 0.5em 0 0;
+}
+
+.dark-text {
+    color: #314854;
+}
+
+.main-text {
+    color: #60749a;
+}
+
+.dark-blue {
+    color: #0e2937;
+}
+
+.ninja-blue {
+    color: #187abf;
+}
+
+.ninja-green {
+    color: #0db88f;
+}
+
+.ninja-red {
+    color: #c7271a;
+}
+
+.ninja-purple {
+    color: #7731d8;
+}
+
+.bold-9 {
+    font-family: 'Azo Sans Bk';
+}
+
+.spaced-text {
+    letter-spacing: 0.1em;
+}

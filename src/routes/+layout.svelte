@@ -1,4 +1,5 @@
 <script>
+	import "$lib/styles/global.scss"
 	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 
