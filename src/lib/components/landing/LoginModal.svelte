@@ -60,7 +60,7 @@
 			.close-btn {
                 position: absolute;
 				border: none;
-                transform: translateX(9em) translateY(-12em);
+                transform: translateX(9em) translateY(-14.25em);
                 background-color: transparent;
                 img {
                     height: 2em;
