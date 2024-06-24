@@ -1,10 +1,13 @@
 <script>
+	import { superForm } from "sveltekit-superforms";
 	import LoginModal from "./LoginModal.svelte";
+
+    export let data;
 </script>
 
 <div>
     <img src="logos/cnbc.svg" alt="CNBC logo">
-    <LoginModal></LoginModal>
+    <LoginModal {data}></LoginModal>
 </div>
 
 <style lang="scss">

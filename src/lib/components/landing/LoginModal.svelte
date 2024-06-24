@@ -1,7 +1,15 @@
 <script lang="ts">
-	let showModal = false;
-	let user = 'student';
 	import { scale } from 'svelte/transition';
+	import { superForm } from 'sveltekit-superforms';
+
+    export let data;
+
+    const { form, message, constraints, errors, enhance } = superForm(data.form)
+
+	let showModal = false;
+	let user_role = 'student';
+
+    $: $form.user_role = user_role
 </script>
 
 <button
@@ -23,12 +31,30 @@
 			</button>
             <img src="logos/cnbc.svg" alt="CNBC logo">
 			<div>
-				<button class="toggle-btn bold-9 {user == 'student' ? 'active' : ''}" on:click={() => {user = "student"}}>Student</button>
-				<button class="toggle-btn bold-9 {user == 'admin' ? 'active' : ''}" on:click={() => {user = "admin"}}>Admin</button>
+				<button class="toggle-btn bold-9 {user_role == 'student' ? 'active' : ''}" on:click={() => {user_role = "student"}}>Student</button>
+				<button class="toggle-btn bold-9 {user_role == 'admin' ? 'active' : ''}" on:click={() => {user_role = "admin"}}>Admin</button>
 			</div>
-            <form autocomplete="off">
-                <input type="email" name="email" placeholder="email@example.com">
-                <input type="password" name="password" placeholder="**********">
+            <form method="post" autocomplete="off" use:enhance>
+                <input type="email" name="email" placeholder="email@example.com"
+                bind:value={$form.email}
+                {...$constraints.email}
+                >
+                {#if $errors.email}
+                    <small>{$errors.email}</small>
+                {/if}
+                <input type="password" name="password" placeholder="**********"
+                bind:value={$form.password}
+                {...$constraints.password}
+                >
+                {#if $errors.password}
+                    <small>{$errors.password}</small>
+                {/if}
+                <input style="display: none;" type="text" name="user_role"
+                bind:value={$form.user_role}
+                >
+                {#if $message}
+                    <small>{$message}</small>
+                {/if}
                 <button class="primary-btn bold-9">Login</button>
             </form>
 		</div>
@@ -108,7 +134,6 @@
                 button {
                     transform: translateX(0) translateY(0);
                     position: relative;
-                    background-color: #07a881;
                     width: fit-content;
                     margin-top: 1em;
                 }
