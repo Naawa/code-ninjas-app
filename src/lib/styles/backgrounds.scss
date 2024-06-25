@@ -1,0 +1,15 @@
+.header-gradient {
+    background: rgb(91,179,226);
+    background: linear-gradient(180deg, rgba(91,179,226,1) 0%, rgba(37,108,177,1) 58%, rgba(37,108,177,1) 100%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;    
+}
+
+.create-gradient {
+    background: rgb(0,28,125);
+    background: linear-gradient(180deg, rgba(0,28,125,1) 0%, rgba(24,122,190,1) 100%);
+}
+
+.img-create-gradient{
+    background: rgb(0,28,125);
+    background: linear-gradient(180deg, rgba(0,28,125,1) 0%, rgba(0,97,153,1) 100%);
+}

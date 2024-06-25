@@ -26,10 +26,17 @@ html {
 
     body {
         height: 100%;
-        background-color: #f6f7f8;
+        background-color: #1AB6E4;
+        background-image: linear-gradient(to top right, #1AB6E4, #5BB3E2, #256CB1, #187ABE);
         scroll-behavior: smooth;
         overflow-x: hidden;
-        padding: 1em;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        #wrapper {
+            padding: 2em;
+        }
     }
     
 }
@@ -45,4 +52,20 @@ grammarly-desktop-integration {
 ::placeholder {
     color: #798286;
     font-weight: 700;
+}
+
+.box-shadow {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.box-shadow-right{
+    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.3);
+}
+
+.box-shadow-up {
+    box-shadow: 0 -4px 6px -4px rgba(0, 0, 0, 0.3);
+}
+
+.text-center {
+    text-align: center;
 }
