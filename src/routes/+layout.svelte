@@ -1,29 +1,23 @@
-<script>
-	import "$lib/styles/global.scss"
-	import { goto, invalidate } from '$app/navigation';
-	import { onMount } from 'svelte';
+<!-- src/routes/+layout.svelte -->
+<script lang="ts">
+	import '$lib/styles/global.scss'
+	import { invalidate } from '$app/navigation'
+	import { onMount } from 'svelte'
 
-	export let data;
-	$: ({ session, supabase } = data);
+	export let data
+
+	let { supabase, session } = data
+	$: ({ supabase, session } = data)
 
 	onMount(() => {
-		const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
-			if (!newSession) {
-				/**
-				 * Queue this as a task so the navigation won't prevent the
-				 * triggering function from completing
-				 */
-				setTimeout(() => {
-					goto('/', { invalidateAll: true });
-				});
+		const { data } = supabase.auth.onAuthStateChange((event, _session) => {
+			if (_session?.expires_at !== session?.expires_at) {
+				invalidate('supabase:auth')
 			}
-			if (newSession?.expires_at !== session?.expires_at) {
-				invalidate('supabase:auth');
-			}
-		});
+		})
 
-		return () => data.subscription.unsubscribe();
-	});
+		return () => data.subscription.unsubscribe()
+	})
 </script>
 
 <slot />

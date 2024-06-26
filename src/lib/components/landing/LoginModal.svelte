@@ -71,7 +71,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		backdrop-filter: blur(5px);
+		backdrop-filter: blur(5px) brightness(60%);
+        z-index: 2;
 
 		div {
             background-image: linear-gradient(#1AB7E5, #00619A);
@@ -82,6 +83,7 @@
 			align-items: center;
 			flex-direction: column;
             gap: 1em;
+            box-shadow: 0 0px 10px 0px rgba(74, 74, 74, 0.509);
 
 			.close-btn {
                 position: absolute;
@@ -100,6 +102,7 @@
                 padding: 0;
                 border-radius: 0;
                 border: solid 1px black;
+                box-shadow: none;
 
                 button {
                     background-color: transparent;

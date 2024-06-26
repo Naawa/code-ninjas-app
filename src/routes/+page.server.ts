@@ -1,4 +1,5 @@
 import { loginSchema } from '$lib/utils/validationSchema';
+import { redirect } from '@sveltejs/kit';
 import { fail, message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
@@ -9,7 +10,7 @@ export const load = (async () => {
 });
 
 export const actions = {
-  default: async ({ request }) => {
+  default: async ({ request, locals: { supabase } }) => {
     const form = await superValidate(request, zod(loginSchema));
     console.log(form);
 
@@ -17,13 +18,18 @@ export const actions = {
       return fail(400, { form });
     }
 
-    /**
-     * 1. Check if user exists, with appropriate role. Then log them in and redirect to dashboard.
-     * 2. If user doesn't exist, or invalid role, display error message.
-     */
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: form.data.email,
+      password: form.data.password
+    })
     
-
-
-    return message(form, 'Form posted successfully!');
+    if (error) {
+      console.log(error)
+      return message(form, 'Invalid credentials!');
+    }
+    else {
+      console.log(data)
+      throw redirect(302, '/admin/dashboard')
+    }
   }
 };
