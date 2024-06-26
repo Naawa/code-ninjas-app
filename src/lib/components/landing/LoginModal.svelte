@@ -35,9 +35,9 @@
 				<button class="toggle-btn bold-9 {user_role == 'admin' ? 'active' : ''}" on:click={() => {user_role = "admin"}}>Admin</button>
 			</div>
             <form method="post" autocomplete="off" use:enhance>
-                <input type="email" name="email" placeholder="email@example.com"
-                bind:value={$form.email}
-                {...$constraints.email}
+                <input type="username" name="username" placeholder="Username"
+                bind:value={$form.username}
+                {...$constraints.username}
                 >
                 {#if $errors.email}
                     <small>{$errors.email}</small>

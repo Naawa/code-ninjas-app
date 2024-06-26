@@ -1,14 +1,22 @@
 <script>
-	import { superForm } from "sveltekit-superforms";
 	import LoginModal from "./LoginModal.svelte";
 
     export let data;
+    console.log(data.user_role)
 </script>
 
 <div id = "header" class ="header-gradient">
     <img src="logo-side.png" alt="CNBC logo">
-    <LoginModal {data}></LoginModal>
-
+    {#if data.session}
+        {#if data.user_role == "admin"}
+        <a href="/admin/dashboard"><button class="primary-btn bold-9">Admin Dashboard</button></a>
+        {:else}
+            <a href="/student/dashboard"><button class="primary-btn bold-9">Student Dashboard</button></a>
+        {/if}
+    {:else}
+        <LoginModal {data}></LoginModal>
+    {/if}
+    
 </div>
 
 

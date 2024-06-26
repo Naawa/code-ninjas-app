@@ -8,7 +8,6 @@
 	export let data;
 </script>
 
-
 <TopBar {data}></TopBar>
 
 <div id="wrapper">
