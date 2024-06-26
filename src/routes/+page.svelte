@@ -1,18 +1,13 @@
 <script>
 	import TopBar from "$lib/components/landing/TopBar.svelte";
-	import BottomBar from "$lib/components/landing/BottomBar.svelte";
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
-	// import '@splidejs/svelte-splide/css';
 	import '@splidejs/svelte-splide/css/skyblue';	
-
 	export let data;
 </script>
 
 <TopBar {data}></TopBar>
 
 <div id="wrapper">
-
-	
 	<div class="featured-header box-shadow">
 		
 		<Splide aria-label="featured-header">
@@ -113,7 +108,7 @@
 	<style lang="scss">
 
 		#wrapper {
-			
+			padding: 2em;
 			.featured-header {
 				margin-bottom:2.5em;
 				border-radius: 30px;

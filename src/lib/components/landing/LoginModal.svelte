@@ -13,6 +13,7 @@
 </script>
 
 <button
+    in:scale|global={{ delay: 400 }}
 	on:click={() => {
 		showModal = true;
 	}}
