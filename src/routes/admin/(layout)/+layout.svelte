@@ -1,8 +1,8 @@
 <script lang="ts">
 	import SignOut from '$lib/components/dashboard/SignOut.svelte';
 	import '$lib/styles/global.scss'
+	import { scale } from 'svelte/transition';
 	export let data;
-	import SignOut from "$lib/components/dashboard/SignOut.svelte";
 </script>
 
 <section>
