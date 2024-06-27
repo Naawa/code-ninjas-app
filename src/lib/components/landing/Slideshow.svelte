@@ -1,8 +1,6 @@
 <script>
-
-
 	import { Splide, SplideSlide } from "@splidejs/svelte-splide";
-
+    import '@splidejs/svelte-splide/css/skyblue';
 </script>
 <div class="featured-header box-shadow">
 		
