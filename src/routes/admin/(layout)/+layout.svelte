@@ -11,7 +11,6 @@
 		</div>
 		<SignOut></SignOut></header>
 
-	<!-- sidebar -->
 	<aside class="sidebar box-shadow-right side-bar-gradient">
 		<li><a href="/"><img src="../settings.png" alt=""></a></li>
         <li><a href="/"><img src="../sessions.png" alt=""></a></li>
@@ -19,14 +18,9 @@
         <li><a href="/"><img src="../profile.png" alt=""></a></li>
         <li><a href="/"><img src="../shop.png" alt=""></a></li>
 	</aside>
-		
-	<!-- content -->
+
 	<main class="content">
 		<h1 class= "white text-shadow">Welcome admin {data.admin.name}</h1>
-		<!-- <img src="../logo-side.png" alt="">
-		<img src="../logo-side.png" alt="">
-		<img src="../logo-side.png" alt="">
-		<img src="../logo-side.png" alt=""> -->
 	</main>
 
 </div>
