@@ -1,7 +1,8 @@
 <script>
-	import { Splide, SplideSlide } from "@splidejs/svelte-splide";
-</script>
 
+	import { Splide, SplideSlide } from "@splidejs/svelte-splide";
+
+</script>
 <div class="featured-header box-shadow">
 		
     <Splide aria-label="featured-header">
