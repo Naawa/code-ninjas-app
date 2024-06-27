@@ -2,47 +2,30 @@
 	import '$lib/styles/global.scss'
 	export let data;
 	import SignOut from "$lib/components/dashboard/SignOut.svelte";
-
-	
 </script>
 
 <div id="container">
-
-	<!-- header -->
 	<header class="header box-shadow header-gradient">
 		<div class="nav-logo">
 			<img src="../logo-side.png" alt="">
 		</div>
 		<SignOut></SignOut></header>
 
-	<!-- sidebar -->
 	<aside class="sidebar box-shadow-right side-bar-gradient">
-		<li><a href=""><img src="../settings.png" alt=""></a></li>
-        <li><a href=""><img src="../sessions.png" alt=""></a></li>
-        <li><a href=""><img src="../leaderboard.png" alt=""></a></li>
-        <li><a href=""><img src="../profile.png" alt=""></a></li>
-        <li><a href=""><img src="../shop.png" alt=""></a></li>
+		<li><a href="/"><img src="../settings.png" alt=""></a></li>
+        <li><a href="/"><img src="../sessions.png" alt=""></a></li>
+        <li><a href="/"><img src="../leaderboard.png" alt=""></a></li>
+        <li><a href="/"><img src="../profile.png" alt=""></a></li>
+        <li><a href="/"><img src="../shop.png" alt=""></a></li>
 	</aside>
-		
-	<!-- content -->
+
 	<main class="content">
 		<h1 class= "white text-shadow">Welcome admin {data.admin.name}</h1>
-		<!-- <img src="../logo-side.png" alt="">
-		<img src="../logo-side.png" alt="">
-		<img src="../logo-side.png" alt="">
-		<img src="../logo-side.png" alt=""> -->
 	</main>
 
 </div>
 
 <style lang="scss">
-
-	body, html {
-		margin: 0;
-		padding: 0;
-		height: 100%;
-	}
-
 	h1{ 
 		text-align: center;
 		margin-top: 20%;
