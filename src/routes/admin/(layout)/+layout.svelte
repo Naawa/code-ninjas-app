@@ -101,7 +101,7 @@
 				background-color: green;
 				box-shadow: -25px 0px 20px -20px rgba(8, 7, 7, 0.45);
 				padding: 10px;
-				transform: translateX(300px);
+				transform: translateX(50px);
 				z-index: 3;
 			}
 		
