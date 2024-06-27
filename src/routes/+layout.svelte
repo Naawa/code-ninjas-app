@@ -1,4 +1,3 @@
-<!-- src/routes/+layout.svelte -->
 <script lang="ts">
 	import '$lib/styles/global.scss'
 	import { invalidate } from '$app/navigation'
