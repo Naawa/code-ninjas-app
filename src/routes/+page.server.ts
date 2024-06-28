@@ -20,17 +20,6 @@ export const actions = {
       return fail(400, { form });
     }
 
-    /**
-     * Check if admin or student account exists by matching username or email to referenced tables.
-     * 
-     * If does not exist, return error.
-     * 
-     * If exists, complete auth with password.
-     * If error, return.
-     * 
-     * Else redirect to referenced dashboard.
-     */
-
     if(form.data.user_role == 'admin') {
       let { data: admins, error } = await supabase.from('admins')
       .select('email').eq('username', form.data.username);
@@ -38,9 +27,8 @@ export const actions = {
       if(error) {
         return message(form, 'Invalid credentials.') 
       }
-      else {
-        console.log(admins[0].email, form.data.password)
-      let { data, error } = await supabase.auth.signInWithPassword({
+      else if(admins) {
+        let { data, error } = await supabase.auth.signInWithPassword({
           email: admins[0].email,
           password: form.data.password,
         })
@@ -62,7 +50,7 @@ export const actions = {
       if(error) {
         return message(form, 'Invalid credentials.')
       }
-      else {
+      else if(students) {
         console.log(students[0].email, form.data.password)
       let { data, error } = await supabase.auth.signInWithPassword({
           email: students[0].email,
