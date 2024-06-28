@@ -45,6 +45,10 @@ grammarly-desktop-integration {
     display: none;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 ::selection {
     background-color: rgba(76, 76, 76, 0.233);
 }
