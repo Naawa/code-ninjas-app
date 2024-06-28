@@ -1,4 +1,11 @@
-import { redirect } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
+
+export const load = async ({ locals: { safeGetSession }}) => {
+    const { session } = await safeGetSession()
+    if(!session) {
+        throw error(401, "Unauthorized")
+    }
+};
 
 export const actions = {
     default: async ({ cookies, locals: { supabase }}) => {
