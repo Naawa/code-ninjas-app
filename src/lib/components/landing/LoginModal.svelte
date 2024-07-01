@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { scale } from 'svelte/transition';
+	import { scale, blur } from 'svelte/transition';
 	import { superForm } from 'sveltekit-superforms';
 
     export let data;
@@ -22,7 +22,7 @@
 
 {#if showModal}
 	<span>
-		<div transition:scale>
+		<div transition:blur>
 			<button class="close-btn"
 				on:click={() => {
 					showModal = false;
@@ -72,7 +72,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		backdrop-filter: blur(5px) brightness(60%);
+		backdrop-filter: blur(1em);
         z-index: 2;
 
 		div {
@@ -85,11 +85,13 @@
 			flex-direction: column;
             gap: 1em;
             box-shadow: 0 0px 10px 0px rgba(74, 74, 74, 0.509);
+            position: relative;
 
 			.close-btn {
                 position: absolute;
 				border: none;
-                transform: translateX(9em) translateY(-14.25em);
+                top: -1em;
+				right: -1em;
                 background-color: transparent;
                 img {
                     height: 2em;

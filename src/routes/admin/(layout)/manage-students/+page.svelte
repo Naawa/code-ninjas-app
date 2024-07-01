@@ -1,7 +1,8 @@
 <script lang="ts">
-	import AddStudent from '$lib/components/admin/dashboard/manage-students/AddStudent.svelte';
-	import RemoveStudent from '$lib/components/admin/dashboard/manage-students/RemoveStudent.svelte';
-	
+	import AddStudent from '$lib/components/admin/manage-students/AddStudent.svelte';
+	import RemoveStudent from '$lib/components/admin/manage-students/RemoveStudent.svelte';
+	import StudentCard from '$lib/components/admin/manage-students/StudentCard.svelte';
+
 	export let data;
 </script>
 
@@ -12,11 +13,11 @@
 		<RemoveStudent {data}></RemoveStudent>
 	</div>
 	<span>
-		{#each data.students as student}
-			<div>
-				{student}
-			</div>
-		{/each}
+		{#if data.students}
+			{#each data.students as student}
+				<StudentCard {...student}></StudentCard>
+			{/each}
+		{/if}
 	</span>
 </section>
 

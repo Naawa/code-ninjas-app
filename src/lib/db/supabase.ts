@@ -9,7 +9,138 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      admins: {
+        Row: {
+          email: string
+          id: string
+          location: string | null
+          name: string | null
+          username: string | null
+        }
+        Insert: {
+          email: string
+          id: string
+          location?: string | null
+          name?: string | null
+          username?: string | null
+        }
+        Update: {
+          email?: string
+          id?: string
+          location?: string | null
+          name?: string | null
+          username?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admins_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      center_profiles: {
+        Row: {
+          created_at: string
+          exploration_bg_src: string | null
+          id: number
+          location: string | null
+          training_bg_src: string | null
+          typing_bg_src: string | null
+        }
+        Insert: {
+          created_at?: string
+          exploration_bg_src?: string | null
+          id?: number
+          location?: string | null
+          training_bg_src?: string | null
+          typing_bg_src?: string | null
+        }
+        Update: {
+          created_at?: string
+          exploration_bg_src?: string | null
+          id?: number
+          location?: string | null
+          training_bg_src?: string | null
+          typing_bg_src?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "center_profiles_location_fkey"
+            columns: ["location"]
+            isOneToOne: false
+            referencedRelation: "admins"
+            referencedColumns: ["location"]
+          },
+        ]
+      }
+      student_profiles: {
+        Row: {
+          belt: string | null
+          center: string | null
+          click_accuracy: string[] | null
+          created_at: string
+          date_of_birth: string | null
+          email: string | null
+          event_completed: boolean | null
+          id: string
+          name: string | null
+          points: number | null
+          profile_banner_src: string | null
+          profile_icon_src: string | null
+          quests_completed: string | null
+          student_number: string | null
+          username: string | null
+          wpm: string | null
+        }
+        Insert: {
+          belt?: string | null
+          center?: string | null
+          click_accuracy?: string[] | null
+          created_at?: string
+          date_of_birth?: string | null
+          email?: string | null
+          event_completed?: boolean | null
+          id: string
+          name?: string | null
+          points?: number | null
+          profile_banner_src?: string | null
+          profile_icon_src?: string | null
+          quests_completed?: string | null
+          student_number?: string | null
+          username?: string | null
+          wpm?: string | null
+        }
+        Update: {
+          belt?: string | null
+          center?: string | null
+          click_accuracy?: string[] | null
+          created_at?: string
+          date_of_birth?: string | null
+          email?: string | null
+          event_completed?: boolean | null
+          id?: string
+          name?: string | null
+          points?: number | null
+          profile_banner_src?: string | null
+          profile_icon_src?: string | null
+          quests_completed?: string | null
+          student_number?: string | null
+          username?: string | null
+          wpm?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

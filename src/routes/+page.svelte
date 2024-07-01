@@ -9,7 +9,6 @@
 
 <TopBar {data}></TopBar>
 <section>
-	<Slideshow></Slideshow>
 	<About></About>
 	<Create></Create>
 </section>

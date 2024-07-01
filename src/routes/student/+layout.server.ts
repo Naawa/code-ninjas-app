@@ -5,7 +5,7 @@ export const load = (async ({ locals: { supabase, safeGetSession } }) => {
     if(!session) {
         throw error(401, "Unauthorized")
     }
-    let { data } = await supabase.from('students')
+    let { data } = await supabase.from('student_profiles')
     .select('*').eq('id', user.id);   
 
     if(!data) {

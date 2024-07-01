@@ -60,7 +60,7 @@ export const actions = {
       }
     }
     else {
-      let { data: students, error } = await supabase.from('students')
+      let { data: students, error } = await supabase.from('student_profiles')
       .select('email').eq('username', form.data.username);
 
       if(error) {
@@ -68,18 +68,20 @@ export const actions = {
       }
       else if(students) {
         console.log(students[0].email, form.data.password)
-      let { data, error } = await supabase.auth.signInWithPassword({
-          email: students[0].email,
-          password: form.data.password,
-        })
-        if(error) {
-          return message(form, 'Invalid credentials.')
-        }
-        else {
-          cookies.set("user_role", form.data.user_role, {
-            path: "/"
+        if(students[0].email) {
+          let { data, error } = await supabase.auth.signInWithPassword({
+            email: students[0].email,
+            password: form.data.password,
           })
-          throw redirect(302, '/student/dashboard')
+          if(error) {
+            return message(form, 'Invalid credentials.')
+          }
+          else {
+            cookies.set("user_role", form.data.user_role, {
+              path: "/"
+            })
+            throw redirect(302, '/student/dashboard')
+          }
         }
       }
     }

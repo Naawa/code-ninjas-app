@@ -1,5 +1,14 @@
 <script lang="ts">
-    import SignOut from "$lib/components/admin/dashboard/SignOut.svelte"
+    export let data
 </script>
 
-<SignOut></SignOut>
+<div id="Leaderboard-section">
+	<h1 class="white text-shadow">Welcome Back, {data.student.name}</h1>
+</div>
+
+<style lang="scss">
+	div {
+		width: 100%;
+        padding: 2em;
+	}
+</style>

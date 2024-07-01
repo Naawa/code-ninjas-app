@@ -1,27 +1,33 @@
 <script lang="ts">
+	import '$lib/styles/global.scss';
 	import SignOut from '$lib/components/admin/dashboard/SignOut.svelte';
-	import '$lib/styles/global.scss'
-	export let data;
 </script>
 
-<section>
-	<a href="/"><img src="/logo-side.png" alt="logo"></a>
-	<h2>Welcome student {data.student.name}</h2>
+<header>
+	<a href="/"><img src="../logo-side.png" alt="" /></a>
 	<SignOut></SignOut>
-</section>
-<slot />
+</header>
+
+<span>
+	<slot />
+</span>
 
 <style lang="scss">
-	section {
+	header {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 2em;
 		height: 8em;
-		
+		gap: 2em;
+		padding: 2em 4em;
+
 		img {
 			height: 3em;
 		}
+	}
+
+	span {
+		display: flex;
+		width: 100%;
+		height: calc(100vh - 8em);
 	}
 </style>
