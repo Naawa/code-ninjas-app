@@ -3,11 +3,27 @@ import { redirect } from '@sveltejs/kit';
 import { fail, message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
-export const load = (async ({ cookies }) => {
+export const load = (async ({ cookies, locals: { supabase, safeGetSession } }) => {
   const form = await superValidate(zod(loginSchema));
+  const session = await safeGetSession();
+  let user_role = cookies.get("user_role");
+  
+  if(session) {
+    if(!user_role) { 
+      let { data: admins, error } = await supabase.from('admins')
+      .select('email').eq('username', form.data.username);
+
+      if(error) {
+        user_role = "student"
+      }
+      else if(admins) {
+        user_role = "admin"
+      }
+    }
+  }
   
   return { 
-    user_role: cookies.get("user_role"),
+    user_role,
     form 
   };
 });

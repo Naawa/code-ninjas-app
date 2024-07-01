@@ -2,7 +2,6 @@
     import { scale } from "svelte/transition";
 	import LoginModal from "./LoginModal.svelte";
     export let data;
-    console.log(data.user_role)
 </script>
 
 <div>

@@ -3,6 +3,7 @@
 @import 'inputs.scss';
 @import 'typography.scss';
 @import 'backgrounds.scss';
+@import 'shadows.scss';
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -58,24 +59,8 @@ grammarly-desktop-integration {
     font-weight: 700;
 }
 
-.box-shadow {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
-
-.box-shadow-right{
-    box-shadow: 25px 0px 20px -20px rgba(0,0,0,0.45);
-}
-
-.box-shadow-up {
-    box-shadow: 0 -4px 6px -4px rgba(0, 0, 0, 0.3);
-}
-
 .text-center {
     text-align: center;
-}
-
-.text-shadow {
-    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.63);
 }
 
 .text-center {

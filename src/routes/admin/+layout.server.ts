@@ -9,6 +9,11 @@ export const load = (async ({ locals: { supabase, safeGetSession } }) => {
     let { data } = await supabase.from('admins')
     .select('*').eq('id', user.id);   
 
+    // Fetch students
+    // Fetch timer config
+
+    let students: string[] = [];
+
     if(!data) {
         throw error(401, "Unauthorized")
     }
@@ -17,5 +22,6 @@ export const load = (async ({ locals: { supabase, safeGetSession } }) => {
         admin: data[0],
         session,
         user,
+        students,
     }
 });

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SignOut from '$lib/components/dashboard/SignOut.svelte';
+	import SignOut from '$lib/components/admin/dashboard/SignOut.svelte';
 	import '$lib/styles/global.scss'
 	export let data;
 </script>

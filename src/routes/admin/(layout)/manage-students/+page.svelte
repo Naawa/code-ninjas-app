@@ -1,29 +1,38 @@
 <script lang="ts">
-	import AddStudent from './addstudent.svelte';
-	import RemoveStudent from './removestudent.svelte';
-
+	import AddStudent from '$lib/components/admin/dashboard/manage-students/AddStudent.svelte';
+	import RemoveStudent from '$lib/components/admin/dashboard/manage-students/RemoveStudent.svelte';
+	
 	export let data;
-	import { scale } from 'svelte/transition';
 </script>
 
-<div id="student-section">
+<section>
 	<h1 class="text-center white text-shadow">Students Section</h1>
-
 	<div class="button-add-remove">
 		<AddStudent {data}></AddStudent>
 		<RemoveStudent {data}></RemoveStudent>
 	</div>
-</div>
+	<span>
+		{#each data.students as student}
+			<div>
+				{student}
+			</div>
+		{/each}
+	</span>
+</section>
 
 <style lang="scss">
-	#student-section {
+	section {
+		display: flex;
+		gap: 2em;
+		align-items: center;
+		flex-direction: column;
 		width: 100%;
-		padding: 50px;
 
-		.button-add-remove {
+		div {
 			display: flex;
 			justify-content: space-around;
-			margin-top: 3em;
+			gap: 2em;
+			align-items: center;
 			width: 100%;
 		}
 	}
