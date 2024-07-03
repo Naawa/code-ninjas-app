@@ -6,60 +6,60 @@
 	<a
 		href="/admin/dashboard"
 		class="color-link"
-		class:active={$page.url.pathname === '/admin/dashboard'}
+		class:active={$page.url.pathname.startsWith('/admin/dashboard')}
 	>
 		<span>
-			<img src="../sessions.png" alt="" />
+			<img src="/sessions.png" alt="" />
 			<h3>Dashboard</h3>
 		</span>
 	</a>
 	<a
 		href="/admin/manage-attendance"
 		class="color-link"
-		class:active={$page.url.pathname === '/admin/manage-attendance'}
+		class:active={$page.url.pathname.startsWith('/admin/manage-attendance')}
 	>
 		<span>
-			<img src="../sessions.png" alt="" />
+			<img src="/sessions.png" alt="" />
 			<h3>Attendance</h3>
 		</span>
 	</a>
 	<a
 		href="/admin/manage-students"
 		class="color-link"
-		class:active={$page.url.pathname === '/admin/manage-students'}
+		class:active={$page.url.pathname.startsWith('/admin/manage-students')}
 	>
 		<span>
-			<img src="../profile.png" alt="" />
+			<img src="/profile.png" alt="" />
 			<h3>Students</h3>
 		</span>
 	</a>
 	<a
 		href="/admin/manage-shop"
 		class="color-link"
-		class:active={$page.url.pathname === '/admin/manage-shop'}
+		class:active={$page.url.pathname.startsWith('/admin/manage-shop')}
 	>
 		<span>
-			<img src="../shop.png" alt="" />
+			<img src="/shop.png" alt="" />
 			<h3>Shop</h3>
 		</span>
 	</a>
 	<a
 		href="/admin/leaderboard"
 		class="color-link"
-		class:active={$page.url.pathname === '/admin/leaderboard'}
+		class:active={$page.url.pathname.startsWith('/admin/leaderboard')}
 	>
 		<span>
-			<img src="../leaderboard.png" alt="" />
+			<img src="/leaderboard.png" alt="" />
 			<h3>Leaderboard</h3>
 		</span>
 	</a>
 	<a
 		href="/admin/manage-account"
 		class="color-link"
-		class:active={$page.url.pathname === '/admin/manage-account'}
+		class:active={$page.url.pathname.startsWith('/admin/manage-account')}
 	>
 		<span>
-			<img src="../settings.png" alt="" />
+			<img src="/settings.png" alt="" />
 			<h3>Account</h3>
 		</span>
 	</a>

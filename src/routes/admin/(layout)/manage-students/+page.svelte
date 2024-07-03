@@ -15,7 +15,9 @@
 	<span>
 		{#if data.students}
 			{#each data.students as student}
-				<StudentCard {...student}></StudentCard>
+				<a href="/admin/manage-students/{student.username}">
+					<StudentCard {...student}></StudentCard>
+				</a>
 			{/each}
 		{/if}
 	</span>

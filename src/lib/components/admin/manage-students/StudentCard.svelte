@@ -23,9 +23,9 @@
         height: 8em;
         background-color: white;
         gap: 1em;
-
-        h3 {
-            text-align: center;
+     
+        h4, b {
+            color: black;
         }
     }
 </style>

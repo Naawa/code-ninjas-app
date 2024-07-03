@@ -3,5 +3,5 @@
 </script>
 
 <form in:scale|global={{ delay: 400 }} out:scale|global={{ duration: 100}} method="POST" action="/admin/dashboard">
-    <button class="primary-btn bold-9">Sign Out</button>
+    <button class="caution-btn bold-9">Sign Out</button>
 </form>
