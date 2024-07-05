@@ -14,7 +14,7 @@
 <span>
 	<AdminSideNav></AdminSideNav>
 	{#key $page.url.pathname}
-		<div in:scale>
+		<div in:scale={{ start: 0.9 }}>
 			<slot />
 		</div>
 	{/key}
@@ -26,7 +26,7 @@
 		justify-content: space-between;
 		height: 8em;
 		gap: 2em;
-		padding: 2em 4em;
+		padding: 2em 3em;
 
 		img {
 			height: 3em;
@@ -40,6 +40,7 @@
 		position: relative;
 
 		div {
+			position: relative;
 			display: flex;
 			width: 100%;
 		}
