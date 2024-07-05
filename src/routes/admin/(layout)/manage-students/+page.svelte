@@ -38,5 +38,10 @@
 			align-items: center;
 			width: 100%;
 		}
+
+		span {
+			display: flex;
+			gap: 1em;
+		}
 	}
 </style>

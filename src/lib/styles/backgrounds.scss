@@ -18,3 +18,21 @@
     background: rgb(10,79,139);
     background: linear-gradient(180deg, rgba(10,79,139,1) 10%, rgba(24,122,191,1) 100%);
 }
+
+.rounded-glass-container {
+    border-radius: 1em;
+    background-color: #0c549397;
+    backdrop-filter: blur(10em);
+    box-shadow: 0 0 0.1em 0.1em rgba(255, 255, 255, 0.228);
+}
+
+.rounded-glass {
+    border-radius: 1em;
+    background-color: #0c549397;
+    backdrop-filter: blur(10em);
+    box-shadow: 0 0 0.1em 0.1em rgba(255, 255, 255, 0.228);
+
+    &:hover {
+        background-color: #0c54935c;
+    }
+}

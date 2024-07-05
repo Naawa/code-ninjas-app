@@ -84,6 +84,17 @@
 			border-radius: 1em;
 			width: 100%;
 
+			&:hover {
+				width: 120%;
+				border-radius: 0 1em 1em 0;
+				text-align: right;
+
+				span {
+					translate: 4em;
+				}
+			}
+
+
 			span {
 				display: flex;
 				align-items: center;

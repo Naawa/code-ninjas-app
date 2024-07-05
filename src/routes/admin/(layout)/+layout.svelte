@@ -2,6 +2,8 @@
 	import '$lib/styles/global.scss';
 	import SignOut from '$lib/components/admin/dashboard/SignOut.svelte';
 	import AdminSideNav from '$lib/components/admin/dashboard/AdminSideNav.svelte';
+	import { page } from '$app/stores';
+	import { scale } from 'svelte/transition';
 </script>
 
 <header>
@@ -11,7 +13,11 @@
 
 <span>
 	<AdminSideNav></AdminSideNav>
-	<slot />
+	{#key $page.url.pathname}
+		<div in:scale>
+			<slot />
+		</div>
+	{/key}
 </span>
 
 <style lang="scss">
@@ -31,5 +37,11 @@
 		display: flex;
 		width: 100%;
 		height: calc(100vh - 8em);
+		position: relative;
+
+		div {
+			display: flex;
+			width: 100%;
+		}
 	}
 </style>

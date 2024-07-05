@@ -2,7 +2,7 @@
     export let name, points;
 </script>
 
-<div class="simple-shadow">
+<div>
     <h4>{name}</h4>
     {#if points}
         <b>{points} Pts</b>
@@ -18,14 +18,16 @@
         justify-content: center;
         align-items: center;
         padding: 2em;
-        border-radius: 0.5em;
+        border-radius: 1em;
         width: 12em;
         height: 8em;
-        background-color: white;
         gap: 1em;
-     
-        h4, b {
-            color: black;
+        background-color: #0c549397;
+        backdrop-filter: blur(10em);
+        box-shadow: 0 0 0.1em 0.1em rgba(255, 255, 255, 0.228);
+
+        &:hover {
+            background-color: #0c54935c;
         }
     }
 </style>
