@@ -9,15 +9,17 @@ export const load = (async ({ cookies, locals: { supabase, safeGetSession } }) =
   let user_role = cookies.get("user_role");
   
   if(session) {
+    let user = await supabase.auth.getUser()
     if(!user_role) { 
       let { data: admins, error } = await supabase.from('admins')
-      .select('email').eq('username', form.data.username);
+      .select('email').eq('email', user.data.user?.email || "")
 
-      if(error) {
-        user_role = "student"
-      }
-      else if(admins) {
+      if(admins?.at(0)) {
         user_role = "admin"
+      }
+      else {
+        user_role = "student"
+        
       }
     }
   }

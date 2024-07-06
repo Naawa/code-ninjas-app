@@ -2,7 +2,7 @@
 	import ModifyPoints from "$lib/components/admin/manage-students/ModifyPoints.svelte";
 
 	export let data;
-	let { student } = data;
+	$: ({ student } = data);
 </script>
 
 <section class="rounded-glass-container">
@@ -16,7 +16,7 @@
 		{:else}
 			<h4>{student?.points} Pts</h4>
 		{/if}
-		<ModifyPoints points={student?.points}></ModifyPoints>
+		<ModifyPoints {data} username={student?.username || ""} currentPoints={student?.points || 0}></ModifyPoints>
 	</span>
 	<span class="light-rounded-glass">
 		<h4>{student?.belt} Belt</h4>

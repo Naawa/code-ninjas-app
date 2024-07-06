@@ -22,3 +22,9 @@ export const removeStudentSchema = z.object({
   username: z.string(),
   center: z.string()
 });
+
+
+export const modifyPointsSchema = z.object({
+  pointsValue: z.number(),
+  currentPoints: z.number()
+});

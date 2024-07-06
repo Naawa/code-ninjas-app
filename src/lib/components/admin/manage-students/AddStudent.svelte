@@ -123,7 +123,7 @@
 
 <style lang="scss">
 	span {
-		position: fixed;
+		position: absolute;
 		height: 100vh;
 		width: 100vw;
 		top: 0;

@@ -15,7 +15,7 @@ export const load = (async ({ locals: { supabase, safeGetSession } }) => {
                 console.log(error)
             }
             else if(admins) {
-                return admins[0]
+                return admins.at(0)
             }
         }
     }

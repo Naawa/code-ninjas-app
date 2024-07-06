@@ -8,7 +8,7 @@
 	const { form, message, constraints, errors, enhance } = superForm(data.form);
 
 	let showModal = false;
-	let user_role = 'student';
+	$: user_role = data.user_role || 'student';
 
 	$: $form.user_role = user_role;
 

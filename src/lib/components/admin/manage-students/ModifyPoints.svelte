@@ -1,9 +1,19 @@
 <script lang="ts">
-	export let points;
+	export let data
+	export let currentPoints: number;
+	export let username: string;
+
+	const { form, enhance, errors, message, constraints } = superForm(data.form)
+
 	let showModal = false;
 	import { blur, scale } from 'svelte/transition';
+	import { superForm } from 'sveltekit-superforms';
 
-    let newValue = 0;
+    $: newValue = 0;
+	$: $form.pointsValue = newValue
+	$: $form.currentPoints = currentPoints
+
+	$: console.log($form.pointsValue)
 </script>
 
 <button
@@ -26,12 +36,19 @@
 				<img src="/close-login.png" alt="" />
 			</button>
             <h3>Modify Points</h3>
-			<h4>Points: {points}</h4>
-			<input type="number" bind:value={newValue}>
-            <span>
-                <button>Add</button>
-                <button>Remove</button>
-            </span>
+			<h4>Points: {currentPoints}</h4>
+			<form method="post" use:enhance>
+				<input type="number" bind:value={newValue}>
+				<input style="display: none;" name="pointsValue" type="number" bind:value={$form.pointsValue}>
+				<input style="display: none;" name="currentPoints" type="number" bind:value={$form.currentPoints}>
+				{#if $message}
+					<h5>{$message}</h5>
+				{/if}
+				<div>
+					<button class="primary-btn" type="submit" formaction="/admin/manage-students/{username}?/addPoints">Add</button>
+					<button class="caution-btn" type="submit" formaction="/admin/manage-students/{username}?/removePoints">Remove</button>
+				</div>
+			</form>
 		</div>
 	</span>
 {/if}
@@ -73,14 +90,9 @@
 				}
 			}
 
-			div {
-				background-image: none;
-				flex-direction: row;
-				gap: 0;
-				padding: 0em;
-				border-radius: 0;
-				border: solid 1px black;
-				box-shadow: none;
+			input {
+				width: 20em;
+				text-align: center	;
 			}
 
 			form {
@@ -89,12 +101,14 @@
 				align-items: center;
 				flex-direction: column;
 				gap: 1em;
-				input {
-					text-align: center;
-				}
-
-				h5, small {
-					color: white
+				div {
+					display: flex;
+					flex-direction: row;
+					background-image: none;
+					box-shadow: none;
+					padding: 0;
+					gap: 1em;
+					border: none;
 				}
 			}
 		}
