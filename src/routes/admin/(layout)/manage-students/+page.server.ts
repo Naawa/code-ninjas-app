@@ -66,6 +66,7 @@ export const actions = {
               date_of_birth: addStudentForm.data.date_of_birth,
               belt: addStudentForm.data.belt,
               center: addStudentForm.data.center,
+              student_number: addStudentForm.data.student_number
             }])
             .select()
           if (error) {

@@ -38,7 +38,6 @@
 		display: flex;
 		width: 100%;
 		height: calc(100vh - 8em);
-		position: relative;
 
 		div {
 			display: flex;
