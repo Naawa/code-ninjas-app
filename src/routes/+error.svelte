@@ -4,7 +4,7 @@
 
 {#if $page.error?.message}
     <div>
-        <span>
+        <span class="light-rounded-glass">
             <h1>{$page.error.message}</h1>
             <a href="/"><button class="primary-btn bold-9">Home</button></a>
         </span>
@@ -23,8 +23,6 @@
 
         span {
             padding: 4em;
-            background-color: rgba(255, 255, 255, 0.945);
-            border-radius: 0.5em;
             display: flex;
             flex-direction: column;
             justify-content: center;
