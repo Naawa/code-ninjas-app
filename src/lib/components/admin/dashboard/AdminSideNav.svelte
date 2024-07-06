@@ -10,7 +10,7 @@
 	>
 		<span>
 			<img src="/sessions.png" alt="" />
-			<h3>Dashboard</h3>
+			<h4>Dashboard</h4>
 		</span>
 	</a>
 	<a
@@ -20,7 +20,7 @@
 	>
 		<span>
 			<img src="/sessions.png" alt="" />
-			<h3>Attendance</h3>
+			<h4>Attendance</h4>
 		</span>
 	</a>
 	<a
@@ -30,7 +30,7 @@
 	>
 		<span>
 			<img src="/profile.png" alt="" />
-			<h3>Students</h3>
+			<h4>Students</h4>
 		</span>
 	</a>
 	<a
@@ -40,7 +40,7 @@
 	>
 		<span>
 			<img src="/shop.png" alt="" />
-			<h3>Shop</h3>
+			<h4>Shop</h4>
 		</span>
 	</a>
 	<a
@@ -50,7 +50,7 @@
 	>
 		<span>
 			<img src="/leaderboard.png" alt="" />
-			<h3>Leaderboard</h3>
+			<h4>Leaderboard</h4>
 		</span>
 	</a>
 	<a
@@ -60,7 +60,7 @@
 	>
 		<span>
 			<img src="/settings.png" alt="" />
-			<h3>Account</h3>
+			<h4>Account</h4>
 		</span>
 	</a>
 </div>
@@ -71,7 +71,7 @@
 		flex-direction: column;
 		min-width: fit-content;
 		justify-content: center;
-		gap: 3em;
+		gap: 2em;
 		align-items: center;
 		border-radius: 0 2em 0 0;
 
@@ -81,17 +81,13 @@
 			width: fit-content;
 			height: fit-content;
 			padding: 1em 2em;
-			border-radius: 1em;
 			width: 100%;
 
 			&:hover {
-				width: 120%;
-				border-radius: 0 1em 1em 0;
+				border-radius: 0;
+				background-color: #fffefe1b;
 				text-align: right;
-
-				span {
-					translate: 4em;
-				}
+				backdrop-filter: blur(20px);
 			}
 
 
@@ -101,12 +97,15 @@
 				width: 100%;
 				gap: 1em;
 				
-				h3 {
+				h4 {
+					display: flex;
+					align-items: center;
 					color: white;
 				}
 
 				img {
-					height: 2em;
+					height: 1.75em;
+					translate: 0 -0.15em;
 				}
 			}
 		}
@@ -119,7 +118,12 @@
 		text-align: right;
 
 		span {
-			translate: 4em;
+			translate: 3em;
+		}
+
+		&:hover {
+			border-radius: 0 1em 1em 0;
+			background-color: #0db88f;
 		}
 	}
 </style>
