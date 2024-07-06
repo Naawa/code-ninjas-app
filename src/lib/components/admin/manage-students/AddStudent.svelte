@@ -4,7 +4,13 @@
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	export let data;
 
-	const { form: addStudentForm, message: addStudentMessage, constraints: addStudentConstraints, errors: addStudentErrors, enhance: addStudentEnhance } = superForm(data.addStudentForm);
+	const {
+		form: addStudentForm,
+		message: addStudentMessage,
+		constraints: addStudentConstraints,
+		errors: addStudentErrors,
+		enhance: addStudentEnhance
+	} = superForm(data.addStudentForm);
 </script>
 
 <button
@@ -25,9 +31,14 @@
 					showModal = false;
 				}}
 			>
-				<img src="../close-login.png" alt="" />
+				<img src="/close-login.png" alt="" />
 			</button>
-			<form method="post" action="/admin/manage-students?/addStudent" autocomplete="off" use:addStudentEnhance>
+			<form
+				method="post"
+				action="/admin/manage-students?/addStudent"
+				autocomplete="off"
+				use:addStudentEnhance
+			>
 				<button type="submit" disabled style="display: none" aria-hidden="true"></button>
 				<input
 					type="text"
@@ -37,8 +48,8 @@
 					{...$addStudentConstraints.name}
 				/>
 				{#if $addStudentErrors.name}
-                    <small>{$addStudentErrors.name}</small>
-                {/if}
+					<small>{$addStudentErrors.name}</small>
+				{/if}
 				<input
 					type="text"
 					name="username"
@@ -47,8 +58,8 @@
 					{...$addStudentConstraints.username}
 				/>
 				{#if $addStudentErrors.username}
-                    <small>{$addStudentErrors.username}</small>
-                {/if}
+					<small>{$addStudentErrors.username}</small>
+				{/if}
 				<input
 					type="email"
 					name="email"
@@ -57,8 +68,8 @@
 					{...$addStudentConstraints.email}
 				/>
 				{#if $addStudentErrors.email}
-                    <small>{$addStudentErrors.email}</small>
-                {/if}
+					<small>{$addStudentErrors.email}</small>
+				{/if}
 				<input
 					type="password"
 					name="password"
@@ -67,15 +78,25 @@
 					{...$addStudentConstraints.password}
 				/>
 				{#if $addStudentErrors.password}
-                    <small>{$addStudentErrors.password}</small>
-                {/if}
-				<input
-					type="text"
-					name="belt"
+					<small>{$addStudentErrors.password}</small>
+				{/if}
+				<select
 					placeholder="Belt"
+					name="belt"
 					bind:value={$addStudentForm.belt}
 					{...$addStudentConstraints.belt}
-				/>
+				>
+				<option value="" disabled>Belt</option>
+					<option>White</option>
+					<option>Yellow</option>
+					<option>Orange</option>
+					<option>Green</option>
+					<option>Blue</option>
+					<option>Red</option>
+					<option>Purple</option>
+					<option>Brown</option>
+					<option>Black</option>
+				</select>
 				<input
 					type="number"
 					name="student_number"
@@ -84,8 +105,13 @@
 					{...$addStudentConstraints.student_number}
 				/>
 				<label for="date_of_birth" class="bold-9">Date Of Birth</label>
-				<input type="date" name="date_of_birth">
-				<input type="text" name="center" style="display: none;" bind:value={$addStudentForm.center}>
+				<input type="date" name="date_of_birth" />
+				<input
+					type="text"
+					name="center"
+					style="display: none;"
+					bind:value={$addStudentForm.center}
+				/>
 				{#if $addStudentMessage}
 					<h5>{$addStudentMessage}</h5>
 				{/if}
@@ -97,7 +123,7 @@
 
 <style lang="scss">
 	span {
-		position: absolute;
+		position: fixed;
 		height: 100vh;
 		width: 100vw;
 		top: 0;
@@ -140,6 +166,9 @@
 				width: 100%;
 				gap: 1em;
 
+				select {
+					text-align: center;
+				}
 				input {
 					text-align: center;
 				}
@@ -148,7 +177,8 @@
 					color: white;
 				}
 
-				h5, small {
+				h5,
+				small {
 					color: white;
 				}
 

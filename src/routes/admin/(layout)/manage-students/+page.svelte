@@ -7,7 +7,7 @@
 </script>
 
 <section>
-	<h1 class="text-center white text-shadow">Students Section</h1>
+	<h1>Manage Students</h1>
 	<div class="button-add-remove">
 		<AddStudent {data}></AddStudent>
 		<RemoveStudent {data}></RemoveStudent>

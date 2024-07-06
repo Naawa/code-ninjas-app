@@ -18,13 +18,13 @@
         justify-content: center;
         align-items: center;
         padding: 2em;
-        border-radius: 1em;
         width: 12em;
         height: 8em;
         gap: 1em;
-        background-color: #0c549397;
-        backdrop-filter: blur(10em);
-        box-shadow: 0 0 0.1em 0.1em rgba(255, 255, 255, 0.228);
+        border-radius: 1em;
+        background-color: #ffffff0f;
+        backdrop-filter: blur(2em);
+        box-shadow: 0 0 0.1em 0.05em rgba(255, 255, 255, 0.5);
 
         &:hover {
             background-color: #0c54935c;

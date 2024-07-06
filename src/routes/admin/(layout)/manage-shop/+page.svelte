@@ -1,16 +1,11 @@
-<script lang="ts">
-
-</script>
-
-<div id = "Shop-section">
-    <h1 class = "white text-center text-shadow">Manage Shop</h1>
-</div>
+<section>
+    <h1>Manage Shop</h1>
+</section>
 
 
 <style lang="scss">
-    #Shop-section {
-        width: 100%;
-        padding: 50px;
+    section {
+        display: flex;
+        justify-content: center;
     }
-
 </style>

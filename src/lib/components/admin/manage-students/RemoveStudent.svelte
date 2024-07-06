@@ -24,7 +24,7 @@
 					showModal = false;
 				}}
 			>
-				<img src="../close-login.png" alt="" />
+				<img src="/close-login.png" alt="" />
 			</button>
 
 			<form method="post" action="/admin/manage-students?/removeStudent" use:removeStudentEnhance>
@@ -44,7 +44,7 @@
 
 <style lang="scss">
 	span {
-		position: absolute;
+		position: fixed;
 		height: 100vh;
 		width: 100vw;
 		top: 0;

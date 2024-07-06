@@ -7,14 +7,14 @@
 </script>
 
 <header>
-	<a href="/"><img src="../logo-side.png" alt="" /></a>
+	<a href="/"><img src="/logo-side.png" alt="" /></a>
 	<SignOut></SignOut>
 </header>
 
 <span>
 	<AdminSideNav></AdminSideNav>
 	{#key $page.url.pathname}
-		<div in:scale={{ start: 0.9 }}>
+		<div in:scale={{ delay: 150, start: 0.9 }}>
 			<slot />
 		</div>
 	{/key}
@@ -40,7 +40,6 @@
 		position: relative;
 
 		div {
-			position: relative;
 			display: flex;
 			width: 100%;
 		}

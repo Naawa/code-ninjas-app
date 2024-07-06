@@ -1,5 +1,5 @@
 <div id="Leaderboard-section">
-	<h1 class="white text-shadow">Welcome Back, Sensei</h1>
+	<h1>Welcome Back, Sensei</h1>
 
 	<div class="notif">
 		<h3 class="bold-9 text-center">Notifications</h3>
