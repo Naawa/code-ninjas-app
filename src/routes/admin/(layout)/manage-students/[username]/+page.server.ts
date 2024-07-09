@@ -12,10 +12,10 @@ export const load = (async ({ params, locals: { supabase, safeGetSession } }) =>
     const form = await superValidate(zod(modifyPointsSchema));
     const { data, error } = await supabase.from('student_profiles').select('*').eq('username', params.username)
 
-    if(data) {
+    if (data) {
       return {
         form,
-        student: data.at(0)
+        student: data[0]
       }
     }
   }
@@ -24,36 +24,56 @@ export const load = (async ({ params, locals: { supabase, safeGetSession } }) =>
 export const actions = {
   addPoints: async ({ params, request, locals: { supabase } }) => {
     const form = await superValidate(request, zod(modifyPointsSchema));
-    if(!form.valid) {
+    if (!form.valid) {
       return message(form, "Invalid input.")
     }
     else {
-      let value = form.data.currentPoints + form.data.pointsValue
-      if(value < 0) {
-        return message(form, "Not enough points!");
-      }
-      let { data, error } = await supabase.from('student_profiles').update({
-        points: value,
-      }).eq('username', params.username);
+      let { data, error } = await supabase.from('student_profiles').select("points").eq('username', params.username)
 
-      return message(form, "Operation successful.")
+      if (data) {
+        let value = data[0].points
+        if (value != null) {
+          if (value + form.data.pointsValue >= 0) {
+            let { data, error } = await supabase.from('student_profiles').update({
+              points: value + form.data.pointsValue,
+            }).eq('username', params.username);
+
+            return message(form, "Operation successful.")
+          }
+          else {
+            return message(form, "Points will be negative!")
+          }
+        }
+        else {
+          console.log(value)
+          return message(form, "Value error.")
+        }
+      }
     }
   },
   removePoints: async ({ params, request, locals: { supabase } }) => {
     const form = await superValidate(request, zod(modifyPointsSchema));
-    if(!form.valid) {
+    if (!form.valid) {
       return message(form, "Invalid input.")
     }
     else {
-      let value = form.data.currentPoints - form.data.pointsValue
-      if(value < 0) {
-        return message(form, "Not enough points!");
-      }
-      let { data, error } = await supabase.from('student_profiles').update({
-        points: value,
-      }).eq('username', params.username);
+      let { data, error } = await supabase.from('student_profiles').select("points").eq('username', params.username)
 
-      return message(form, "Operation successful.")
+      if (data) {
+        let value = data[0].points
+        if (value != null) {
+          if (value - form.data.pointsValue >= 0) {
+            let { data, error } = await supabase.from('student_profiles').update({
+              points: value - form.data.pointsValue,
+            }).eq('username', params.username);
+
+            return message(form, "Operation successful.")
+          }
+          else {
+            return message(form, "Not enough points!")
+          }
+        }
+      }
     }
   }
 };

@@ -2,18 +2,12 @@
 	export let data
 	export let currentPoints: number;
 	export let username: string;
+	import { blur, scale } from 'svelte/transition';
+	import SuperDebug, { superForm } from 'sveltekit-superforms';
 
 	const { form, enhance, errors, message, constraints } = superForm(data.form)
 
 	let showModal = false;
-	import { blur, scale } from 'svelte/transition';
-	import { superForm } from 'sveltekit-superforms';
-
-    $: newValue = 0;
-	$: $form.pointsValue = newValue
-	$: $form.currentPoints = currentPoints
-
-	$: console.log($form.pointsValue)
 </script>
 
 <button
@@ -35,11 +29,11 @@
 			>
 				<img src="/close-login.png" alt="" />
 			</button>
+
             <h3>Modify Points</h3>
 			<h4>Points: {currentPoints}</h4>
 			<form method="post" use:enhance>
-				<input type="number" bind:value={newValue}>
-				<input style="display: none;" name="pointsValue" type="number" bind:value={$form.pointsValue}>
+				<input type="number" name="pointsValue" bind:value={$form.pointsValue}>
 				<input style="display: none;" name="currentPoints" type="number" bind:value={$form.currentPoints}>
 				{#if $message}
 					<h5>{$message}</h5>

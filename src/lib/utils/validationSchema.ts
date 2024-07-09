@@ -26,5 +26,4 @@ export const removeStudentSchema = z.object({
 
 export const modifyPointsSchema = z.object({
   pointsValue: z.number(),
-  currentPoints: z.number()
 });

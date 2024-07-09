@@ -11,11 +11,7 @@
 		<h4>@{student?.username}</h4>
 	</div>
 	<span class="light-rounded-glass">
-		{#if student?.points == null}
-			<h4>0 Pts</h4>
-		{:else}
-			<h4>{student?.points} Pts</h4>
-		{/if}
+		<h4>{student?.points} Pts</h4>
 		<ModifyPoints {data} username={student?.username || ""} currentPoints={student?.points || 0}></ModifyPoints>
 	</span>
 	<span class="light-rounded-glass">
@@ -23,11 +19,7 @@
 		<button class="secondary-btn">Modify</button>
 	</span>
 	<span class="light-rounded-glass">
-		{#if student?.student_number == null}
-			<h4>Student Number: 000000000</h4>
-		{:else}
-			<h4>Student Number: {student?.student_number}</h4>
-		{/if}
+		<h4>Student Number: {student?.student_number}</h4>
 		<button class="secondary-btn">Modify</button>
 	</span>
 	<span class="light-rounded-glass">
