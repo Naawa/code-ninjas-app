@@ -1,10 +1,13 @@
 <script lang="ts">
-	
-	export let data;
-	let showModal = false;
-	const { form: removeStudentForm, message: removeStudentMessage, constraints: removeStudentConstraints, errors: removeStudentErrors, enhance: removeStudentEnhance } = superForm(data.removeStudentForm);
+	export let data
+	export let currentPoints: number;
+	export let username: string;
 	import { blur, scale } from 'svelte/transition';
-	import { superForm } from 'sveltekit-superforms';
+	import SuperDebug, { superForm } from 'sveltekit-superforms';
+
+	const { form, enhance, errors, message, constraints } = superForm(data.form)
+
+	let showModal = false;
 </script>
 
 <button
@@ -12,7 +15,8 @@
 	on:click={() => {
 		showModal = true;
 	}}
-	class="primary-btn bold-9 cursor-pointer">REMOVE</button>
+	class="secondary-btn bold-9">Modify</button
+>
 
 {#if showModal}
 	<span>
@@ -26,16 +30,18 @@
 				<img src="/close-login.png" alt="" />
 			</button>
 
-			<form method="post" action="/admin/manage-students?/removeStudent" use:removeStudentEnhance>
-				<input type="text" name="username" placeholder="Student Username" bind:value={$removeStudentForm.username} {...$removeStudentConstraints}>
-				<input type="text" name="center" style="display: none;" bind:value={$removeStudentForm.center}>
-				{#if $removeStudentErrors.name}
-                    <small>{$removeStudentErrors.name}</small>
-                {/if}
-				{#if $removeStudentMessage}
-					<h5>{$removeStudentMessage}</h5>
+            <h3>Modify Points</h3>
+			<h4>Points: {currentPoints}</h4>
+			<form method="post" use:enhance>
+				<input type="number" name="pointsValue" bind:value={$form.pointsValue}>
+				<input style="display: none;" name="currentPoints" type="number" bind:value={$form.currentPoints}>
+				{#if $message}
+					<h5>{$message}</h5>
 				{/if}
-				<button class="primary-btn bold-9 cursor-pointer">Remove</button>
+				<div>
+					<button class="primary-btn" type="submit" formaction="/admin/manage-items/{username}?/addPoints">Add</button>
+					<button class="caution-btn" type="submit" formaction="/admin/manage-items/{username}?/removePoints">Remove</button>
+				</div>
 			</form>
 		</div>
 	</span>
@@ -52,7 +58,7 @@
 		justify-content: center;
 		align-items: center;
 		backdrop-filter: blur(0.25em);
-		z-index: 2;
+		z-index: 100;
 
 		div {
 			background-image: linear-gradient(#1ab7e5, #00619a);
@@ -78,14 +84,9 @@
 				}
 			}
 
-			div {
-				background-image: none;
-				flex-direction: row;
-				gap: 0;
-				padding: 0em;
-				border-radius: 0;
-				border: solid 1px black;
-				box-shadow: none;
+			input {
+				width: 20em;
+				text-align: center	;
 			}
 
 			form {
@@ -94,12 +95,14 @@
 				align-items: center;
 				flex-direction: column;
 				gap: 1em;
-				input {
-					text-align: center;
-				}
-
-				h5, small {
-					color: white
+				div {
+					display: flex;
+					flex-direction: row;
+					background-image: none;
+					box-shadow: none;
+					padding: 0;
+					gap: 1em;
+					border: none;
 				}
 			}
 		}

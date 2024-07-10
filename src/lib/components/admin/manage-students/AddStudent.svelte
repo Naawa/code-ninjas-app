@@ -18,8 +18,7 @@
 	on:click={() => {
 		showModal = true;
 	}}
-	class="primary-btn bold-9">ADD</button
->
+	class="primary-btn bold-9 cursor-pointer">ADD</button>
 
 {#if showModal}
 	<span>
@@ -115,7 +114,7 @@
 				{#if $addStudentMessage}
 					<h5>{$addStudentMessage}</h5>
 				{/if}
-				<button class="primary-btn bold-9">Add</button>
+				<button class="primary-btn bold-9 cursor-pointer">Add</button>
 			</form>
 		</div>
 	</span>

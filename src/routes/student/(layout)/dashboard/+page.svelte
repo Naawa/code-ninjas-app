@@ -10,5 +10,8 @@
 	div {
 		width: 100%;
         padding: 2em;
+		display: flex;
+		justify-content: center;
+		// align-items: center;
 	}
 </style>
