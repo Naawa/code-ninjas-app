@@ -1,15 +1,11 @@
 <script lang="ts">
-	export let data;
+	export let data
+	export let currentPoints: number;
+	export let username: string;
 	import { blur, scale } from 'svelte/transition';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 
-	const {
-		form: addAttendeeForm,
-		enhance: addAttendeeEnhance,
-		errors: addAttendeeErrors,
-		message: addAttendeeMessage,
-		constraints: addAttendeeConstraints
-	} = superForm(data.addAttendeeForm);
+	const { form, enhance, errors, message, constraints } = superForm(data.form)
 
 	let showModal = false;
 </script>
@@ -19,12 +15,12 @@
 	on:click={() => {
 		showModal = true;
 	}}
-	class="primary-btn bold-9" >Add Attendee</button
+	class="secondary-btn bold-9">Modify</button
 >
 
 {#if showModal}
 	<span>
-		<div transition:blur class="rounded-glass-container">
+		<div transition:blur>
 			<button
 				class="close-btn"
 				on:click={() => {
@@ -34,15 +30,17 @@
 				<img src="/close-login.png" alt="" />
 			</button>
 
-			<h3>Add Attendee</h3>
-			<form method="post" use:addAttendeeEnhance>
-				<input type="text" placeholder="Scan Wristband" name="studentNumber" bind:value={$addAttendeeForm.studentNumber}>
+            <h3>Modify Points</h3>
+			<h4>Points: {currentPoints}</h4>
+			<form method="post" use:enhance>
+				<input type="number" name="pointsValue" bind:value={$form.pointsValue}>
+				<input style="display: none;" name="currentPoints" type="number" bind:value={$form.currentPoints}>
+				{#if $message}
+					<h5>{$message}</h5>
+				{/if}
 				<div>
-					<button
-						class="primary-btn bold-9"
-						type="submit"
-						formaction="/admin/manage-attendance?/addAttendee">Add</button
-					>
+					<button class="primary-btn" type="submit" formaction="/admin/manage-items/{username}?/addPoints">Add</button>
+					<button class="caution-btn" type="submit" formaction="/admin/manage-items/{username}?/removePoints">Remove</button>
 				</div>
 			</form>
 		</div>
@@ -63,6 +61,7 @@
 		z-index: 100;
 
 		div {
+			background-image: linear-gradient(#1ab7e5, #00619a);
 			padding: 2.5em 4.5em;
 			border-radius: 1em;
 			display: flex;
@@ -70,6 +69,7 @@
 			align-items: center;
 			flex-direction: column;
 			gap: 1em;
+			box-shadow: 0 0px 10px 0px rgba(74, 74, 74, 0.509);
 			position: relative;
 
 			.close-btn {
@@ -86,7 +86,7 @@
 
 			input {
 				width: 20em;
-				text-align: center;
+				text-align: center	;
 			}
 
 			form {
