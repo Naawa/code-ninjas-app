@@ -27,3 +27,11 @@ export const removeStudentSchema = z.object({
 export const modifyPointsSchema = z.object({
   pointsValue: z.number(),
 });
+
+export const modifyBeltSchema = z.object({
+  newBelt: z.string()
+});
+
+export const modifyStudentNumberSchema = z.object({
+  newStudentNumber: z.string()
+});

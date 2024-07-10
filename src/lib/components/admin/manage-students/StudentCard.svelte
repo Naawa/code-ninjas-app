@@ -18,8 +18,8 @@
         justify-content: center;
         align-items: center;
         padding: 2em;
-        width: 12em;
-        height: 8em;
+        width: 16em;
+        height: 10em;
         gap: 1em;
         border-radius: 1em;
         background-color: #ffffff0f;
@@ -28,6 +28,9 @@
 
         &:hover {
             background-color: #0c54935c;
+        }
+        h4 {
+            text-align: center;
         }
     }
 </style>

@@ -10,10 +10,12 @@ export const load = (async ({ locals: { supabase, safeGetSession } }) => {
   }
   let { data: { user } } = await supabase.auth.getUser()
   let admin;
+
   if (user) {
     const { data: admins, error } = await supabase.from('admins').select('*').eq('id', user.id)
     admin = admins?.at(0)
   }
+  
   const addStudentForm = await superValidate(zod(addStudentSchema), {
     id: "addStudent"
   });

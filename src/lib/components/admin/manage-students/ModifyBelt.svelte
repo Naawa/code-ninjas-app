@@ -1,17 +1,17 @@
 <script lang="ts">
 	export let data;
-	export let currentPoints: number;
+	export let currentBelt: string;
 	export let username: string;
 	import { blur, scale } from 'svelte/transition';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 
 	const {
-		form: modifyPointsForm,
-		enhance: modifyPointsEnhance,
-		errors: modifyPointsErrors,
-		message: modifyPointsMessage,
-		constraints: modifyPointsConstraints
-	} = superForm(data.modifyPointsForm);
+		form: modifyBeltForm,
+		enhance: modifyBeltEnhance,
+		errors: modifyBeltErrors,
+		message: modifyBeltMessage,
+		constraints: modifyBeltConstraints
+	} = superForm(data.modifyBeltForm);
 
 	let showModal = false;
 </script>
@@ -36,29 +36,34 @@
 				<img src="/close-login.png" alt="" />
 			</button>
 
-			<h3>Modify Points</h3>
-			<h4>Points: {currentPoints}</h4>
-			<form method="post" use:modifyPointsEnhance>
-				<input type="number" name="pointsValue" bind:value={$modifyPointsForm.pointsValue} />
-				<input
-					style="display: none;"
-					name="currentPoints"
-					type="number"
-					bind:value={$modifyPointsForm.currentPoints}
-				/>
-				{#if $modifyPointsMessage}
-					<h5>{$modifyPointsMessage}</h5>
+			<h3>Modify Belt</h3>
+			<h4>Belt: {currentBelt}</h4>
+			<form method="post" use:modifyBeltEnhance>
+				<select
+					placeholder="Belt"
+					name="newBelt"
+					bind:value={$modifyBeltForm.newBelt}
+					{...$modifyBeltConstraints.newBelt}
+				>
+					<option value="" disabled>Belt</option>
+					<option>White</option>
+					<option>Yellow</option>
+					<option>Orange</option>
+					<option>Green</option>
+					<option>Blue</option>
+					<option>Red</option>
+					<option>Purple</option>
+					<option>Brown</option>
+					<option>Black</option>
+				</select>
+				{#if $modifyBeltMessage}
+					<h5>{$modifyBeltMessage}</h5>
 				{/if}
 				<div>
 					<button
 						class="primary-btn"
 						type="submit"
-						formaction="/admin/manage-students/{username}?/addPoints">Add</button
-					>
-					<button
-						class="caution-btn"
-						type="submit"
-						formaction="/admin/manage-students/{username}?/removePoints">Remove</button
+						formaction="/admin/manage-students/{username}?/updateBelt">Update</button
 					>
 				</div>
 			</form>

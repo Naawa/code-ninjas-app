@@ -1,5 +1,7 @@
 <script lang="ts">
-	import ModifyPoints from "$lib/components/admin/manage-students/ModifyPoints.svelte";
+	import ModifyBelt from "$lib/components/admin/manage-students/ModifyBelt.svelte";
+import ModifyPoints from "$lib/components/admin/manage-students/ModifyPoints.svelte";
+	import ModifyStudentNumber from "$lib/components/admin/manage-students/ModifyStudentNumber.svelte";
 
 	export let data;
 	$: ({ student } = data);
@@ -16,11 +18,11 @@
 	</span>
 	<span class="light-rounded-glass">
 		<h4>{student?.belt} Belt</h4>
-		<button class="secondary-btn">Modify</button>
+		<ModifyBelt {data} username={student?.username || ""} currentBelt={student?.belt || ""}></ModifyBelt>
 	</span>
 	<span class="light-rounded-glass">
 		<h4>Student Number: {student?.student_number}</h4>
-		<button class="secondary-btn">Modify</button>
+		<ModifyStudentNumber {data} username={student?.username || ""} currentStudentNumber={student?.student_number || ""}></ModifyStudentNumber>
 	</span>
 	<span class="light-rounded-glass">
 		<h4>Email: {student?.email}</h4>
