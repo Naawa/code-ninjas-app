@@ -12,12 +12,12 @@
 	on:click={() => {
 		showModal = true;
 	}}
-	class="primary-btn bold-9">REMOVE</button
+	class="modify-btn bold-9">REMOVE</button
 >
 
 {#if showModal}
 	<span>
-		<div transition:blur>
+		<div transition:blur class="rounded-glass-container">
 			<button
 				class="close-btn"
 				on:click={() => {
@@ -36,7 +36,7 @@
 				{#if $removeStudentMessage}
 					<h5>{$removeStudentMessage}</h5>
 				{/if}
-				<button class="primary-btn bold-9">Remove</button>
+				<button class="caution-btn bold-9">Remove</button>
 			</form>
 		</div>
 	</span>
@@ -56,7 +56,6 @@
 		z-index: 2;
 
 		div {
-			background-image: linear-gradient(#1ab7e5, #00619a);
 			padding: 2.5em 4.5em;
 			border-radius: 1em;
 			display: flex;
@@ -64,7 +63,6 @@
 			align-items: center;
 			flex-direction: column;
 			gap: 1em;
-			box-shadow: 0 0px 10px 0px rgba(74, 74, 74, 0.509);
 			position: relative;
 
 			.close-btn {

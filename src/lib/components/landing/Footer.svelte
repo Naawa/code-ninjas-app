@@ -1,4 +1,4 @@
-<footer class="box-shadow-up">
+<footer>
 	<div id="footer">
 		<div class="logo">
 			<img src="logo-side.png" alt="" />
@@ -18,19 +18,20 @@
 			<li><a href="/"> <img src="contact.png" alt="" /></a></li>
 		</div>
 	</div>
-	<!-- <hr class= "text-center white"> -->
-	<p class="text-center white">&copy 2024 Code Ninjas | All Rights Reserved</p>
+	<p>&copy 2024 Code Ninjas | All Rights Reserved</p>
 </footer>
 
 
 <style lang="scss">
     footer {
-		background: rgb(37, 108, 177);
-		background: linear-gradient(180deg, rgba(37, 108, 177, 1) 18%, rgba(91, 179, 226, 1) 100%);
 
 		p {
 			font-size: 0.7em;
 			opacity: 80%;
+			text-align: center;
+			width: 100vw;
+			max-width: 100vw;
+			margin-bottom: 2em;
 		}
 
 		#footer {

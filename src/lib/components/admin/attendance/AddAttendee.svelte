@@ -1,17 +1,15 @@
 <script lang="ts">
 	export let data;
-	export let currentStudentNumber: string;
-	export let username: string;
 	import { blur, scale } from 'svelte/transition';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 
 	const {
-		form: modifyStudentNumberForm,
-		enhance: modifyStudentNumberEnhance,
-		errors: modifyStudentNumberErrors,
-		message: modifyStudentNumberMessage,
-		constraints: modifyStudentNumberConstraints
-	} = superForm(data.modifyStudentNumberForm);
+		form: addAttendeeForm,
+		enhance: addAttendeeEnhance,
+		errors: addAttendeeErrors,
+		message: addAttendeeMessage,
+		constraints: addAttendeeConstraints
+	} = superForm(data.addAttendeeForm);
 
 	let showModal = false;
 </script>
@@ -21,12 +19,12 @@
 	on:click={() => {
 		showModal = true;
 	}}
-	class="secondary-btn bold-9">Modify</button
+	class="primary-btn bold-9">Add Attendee</button
 >
 
 {#if showModal}
 	<span>
-		<div transition:blur>
+		<div transition:blur class="rounded-glass-container">
 			<button
 				class="close-btn"
 				on:click={() => {
@@ -36,24 +34,14 @@
 				<img src="/close-login.png" alt="" />
 			</button>
 
-			<h3>Modify Student Number</h3>
-			<h4>Student Number: {currentStudentNumber}</h4>
-			<form method="post" use:modifyStudentNumberEnhance>
-				<input
-					type="number"
-					name="student_number"
-					placeholder="Student Number"
-					bind:value={$modifyStudentNumberForm.student_number}
-					{...$modifyStudentNumberConstraints.student_number}
-				/>
-				{#if $modifyStudentNumberMessage}
-					<h5>{$modifyStudentNumberMessage}</h5>
-				{/if}
+			<h3>Add Attendee</h3>
+			<form method="post" use:addAttendeeEnhance>
+				<input type="text" placeholder="Scan Wristband" name="studentNumber" bind:value={$addAttendeeForm.studentNumber}>
 				<div>
 					<button
-						class="primary-btn"
+						class="primary-btn bold-9"
 						type="submit"
-						formaction="/admin/manage-students/{username}?/updateBelt">Update</button
+						formaction="/admin/manage-attendance?/addAttendee">Add</button
 					>
 				</div>
 			</form>
@@ -75,7 +63,6 @@
 		z-index: 100;
 
 		div {
-			background-image: linear-gradient(#1ab7e5, #00619a);
 			padding: 2.5em 4.5em;
 			border-radius: 1em;
 			display: flex;
@@ -83,7 +70,6 @@
 			align-items: center;
 			flex-direction: column;
 			gap: 1em;
-			box-shadow: 0 0px 10px 0px rgba(74, 74, 74, 0.509);
 			position: relative;
 
 			.close-btn {

@@ -2,7 +2,7 @@
     export let name, points;
 </script>
 
-<div>
+<div class="rounded-glass">
     <h4>{name}</h4>
     {#if points}
         <b>{points} Pts</b>
@@ -22,13 +22,7 @@
         height: 10em;
         gap: 1em;
         border-radius: 1em;
-        background-color: #ffffff0f;
-        backdrop-filter: blur(2em);
-        box-shadow: 0 0 0.1em 0.05em rgba(255, 255, 255, 0.5);
 
-        &:hover {
-            background-color: #0c54935c;
-        }
         h4 {
             text-align: center;
         }

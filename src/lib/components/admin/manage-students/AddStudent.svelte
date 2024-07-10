@@ -23,7 +23,7 @@
 
 {#if showModal}
 	<span>
-		<div class="add-student" transition:blur>
+		<div class="rounded-glass-container" transition:blur>
 			<h3 class="white">Create Student Profile</h3>
 			<button
 				class="close-btn"
@@ -135,7 +135,6 @@
 		z-index: 2;
 
 		div {
-			background-image: linear-gradient(#1ab7e5, #00619a);
 			padding: 4em 4.5em;
 			border-radius: 1em;
 			display: flex;
@@ -143,7 +142,6 @@
 			align-items: center;
 			flex-direction: column;
 			gap: 1em;
-			box-shadow: 0 0px 10px 0px rgba(74, 74, 74, 0.509);
 			position: relative;
 
 			.close-btn {

@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 </script>
 
-<div class="side-bar-gradient simple-shadow">
+<div class="rounded-glass-container">
 	<a
 		href="/admin/dashboard"
 		class="color-link"
@@ -73,7 +73,7 @@
 		justify-content: center;
 		gap: 2em;
 		align-items: center;
-		border-radius: 0 2em 0 0;
+		border-radius: 0 1em 0 0;
 
 		a {
 			display: flex;
@@ -85,9 +85,8 @@
 
 			&:hover {
 				border-radius: 0;
-				background-color: #fffefe1b;
+				background-color: #00255349;
 				text-align: right;
-				backdrop-filter: blur(20px);
 			}
 
 
