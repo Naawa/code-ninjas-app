@@ -1,17 +1,17 @@
 <script lang="ts">
 	export let data;
-	export let currentPoints: number;
+	export let currentStudentNumber: string;
 	export let username: string;
 	import { blur, scale } from 'svelte/transition';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 
 	const {
-		form: modifyPointsForm,
-		enhance: modifyPointsEnhance,
-		errors: modifyPointsErrors,
-		message: modifyPointsMessage,
-		constraints: modifyPointsConstraints
-	} = superForm(data.modifyPointsForm);
+		form: modifyStudentNumberForm,
+		enhance: modifyStudentNumberEnhance,
+		errors: modifyStudentNumberErrors,
+		message: modifyStudentNumberMessage,
+		constraints: modifyStudentNumberConstraints
+	} = superForm(data.modifyStudentNumberForm);
 
 	let showModal = false;
 </script>
@@ -36,29 +36,24 @@
 				<img src="/close-login.png" alt="" />
 			</button>
 
-			<h3>Modify Points</h3>
-			<h4>Points: {currentPoints}</h4>
-			<form method="post" use:modifyPointsEnhance>
-				<input type="number" name="pointsValue" bind:value={$modifyPointsForm.pointsValue} />
+			<h3>Modify Student Number</h3>
+			<h4>Student Number: {currentStudentNumber}</h4>
+			<form method="post" use:modifyStudentNumberEnhance>
 				<input
-					style="display: none;"
-					name="currentPoints"
 					type="number"
-					bind:value={$modifyPointsForm.currentPoints}
+					name="student_number"
+					placeholder="Student Number"
+					bind:value={$modifyStudentNumberForm.student_number}
+					{...$modifyStudentNumberConstraints.student_number}
 				/>
-				{#if $modifyPointsMessage}
-					<h5>{$modifyPointsMessage}</h5>
+				{#if $modifyStudentNumberMessage}
+					<h5>{$modifyStudentNumberMessage}</h5>
 				{/if}
 				<div>
 					<button
 						class="primary-btn"
 						type="submit"
-						formaction="/admin/manage-students/{username}?/addPoints">Add</button
-					>
-					<button
-						class="caution-btn"
-						type="submit"
-						formaction="/admin/manage-students/{username}?/removePoints">Remove</button
+						formaction="/admin/manage-students/{username}?/updateBelt">Update</button
 					>
 				</div>
 			</form>
