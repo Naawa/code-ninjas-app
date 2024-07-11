@@ -43,30 +43,40 @@ export type Database = {
       }
       center_profiles: {
         Row: {
+          attendance: string[] | null
           created_at: string
           exploration_bg_src: string | null
-          id: number
+          id: string | null
           location: string | null
           training_bg_src: string | null
           typing_bg_src: string | null
         }
         Insert: {
+          attendance?: string[] | null
           created_at?: string
           exploration_bg_src?: string | null
-          id?: number
+          id?: string | null
           location?: string | null
           training_bg_src?: string | null
           typing_bg_src?: string | null
         }
         Update: {
+          attendance?: string[] | null
           created_at?: string
           exploration_bg_src?: string | null
-          id?: number
+          id?: string | null
           location?: string | null
           training_bg_src?: string | null
           typing_bg_src?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "center_profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "center_profiles_location_fkey"
             columns: ["location"]

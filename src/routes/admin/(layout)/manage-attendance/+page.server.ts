@@ -8,49 +8,148 @@ export const load = (async ({ locals: { supabase, safeGetSession } }) => {
   if (!session) {
     throw error(401, "Unauthorized")
   }
-  let { data: { user } } = await supabase.auth.getUser()
-  let admin;
 
-  if (user) {
-    const { data: admins, error } = await supabase.from('admins').select('*').eq('id', user.id)
-    admin = admins?.at(0)
+  let { data: { user } } = await supabase.auth.getUser()
+
+  async function getAdmin() {
+    const { data: admins, error } = await supabase.from('admins').select('*').eq('id', user?.id || "")
+
+    return admins?.at(0)
   }
-  
+
+  let admin = await getAdmin()
+
   const addAttendeeForm = await superValidate(zod(addByStudentNumberSchema), {
     id: "addStudent"
   });
   const removeAttendeeForm = await superValidate(zod(removeByStudentNumberSchema), {
     id: "removeStudent"
   });
-  if(admin?.location) {
+
+  async function getAttendingStudents() {
+    let { data: center_profiles, error } = await supabase.from('center_profiles').select('attendance').eq('id', user?.id || "")
+    if(center_profiles) {
+      if(center_profiles[0].attendance) {
+        let { data: student_profiles, error } = await supabase.from('student_profiles').select('*').eq('center', admin?.location || "")
+
+        if(student_profiles) {
+          let attendingStudents = []
+          for(let i = 0; i < center_profiles[0].attendance?.length; i++) {
+            for(let j = 0; j < student_profiles.length; j++) {
+              if(student_profiles[j].student_number == center_profiles[0].attendance[i]) {
+                attendingStudents.push(student_profiles[j])
+              }
+            }
+          }
+          return attendingStudents
+        }
+      }
+    }
+  }
+
+  if (admin?.location) {
     addAttendeeForm.data.center = admin?.location
     removeAttendeeForm.data.center = admin?.location
   }
   return {
     addAttendeeForm,
-    removeAttendeeForm
+    removeAttendeeForm,
+    attendingStudents: await getAttendingStudents()
   };
 });
 
 export const actions = {
   addAttendee: async ({ request, locals: { supabase } }) => {
+    let { data: { user } } = await supabase.auth.getUser()
+
     const addAttendeeForm = await superValidate(request, zod(addByStudentNumberSchema));
 
-    if(!addAttendeeForm.valid) {
+    if (user) {
+      if (!addAttendeeForm.valid) {
         return message(addAttendeeForm, "Invalid input.")
-    }
-    else {
-        
+      }
+      else {
+        let { data: center_profiles, error } = await supabase.from('center_profiles').select('attendance').eq('id', user?.id || "")
+
+        if (error) {
+          return message(addAttendeeForm, "Server side error occurred while fetching exisitng attendance.")
+        }
+        else {
+          if (error) {
+            return message(addAttendeeForm, "Server side error occurred while adding attendee.")
+          }
+          else if (center_profiles) {
+            if (center_profiles[0].attendance) {
+              for (let i = 0; i < center_profiles[0].attendance.length; i++) {
+                if (addAttendeeForm.data.studentNumber == center_profiles[0].attendance[i]) {
+                  return message(addAttendeeForm, "Student is already attending.")
+                }
+              }
+              let updatedAttendance: string[] = [...center_profiles[0].attendance, addAttendeeForm.data.studentNumber]
+
+              const { data, error } = await supabase
+                .from('center_profiles')
+                .update({ attendance: updatedAttendance })
+                .eq('id', user?.id)
+                .select()
+
+              if (error) {
+                return message(addAttendeeForm, "Error adding attendee.")
+              }
+              else {
+                return message(addAttendeeForm, "Attendee added successfully.")
+              }
+            }
+          }
+        }
+      }
     }
   },
   removeAttendee: async ({ request, locals: { supabase } }) => {
+    let { data: { user } } = await supabase.auth.getUser()
+
     const addAttendeeForm = await superValidate(request, zod(addByStudentNumberSchema));
 
-    if(!addAttendeeForm.valid) {
+    if (user) {
+      if (!addAttendeeForm.valid) {
         return message(addAttendeeForm, "Invalid input.")
+      }
+      else {
+        let { data: center_profiles, error } = await supabase.from('center_profiles').select('attendance').eq('id', user?.id || "")
+
+        if (error) {
+          return message(addAttendeeForm, "Server side error occurred while fetching exisitng attendance.")
+        }
+        else {
+          if (error) {
+            return message(addAttendeeForm, "Server side error occurred while adding attendee.")
+          }
+          else if (center_profiles) {
+            if (center_profiles[0].attendance) {
+              for (let i = 0; i < center_profiles[0].attendance.length; i++) {
+                if (addAttendeeForm.data.studentNumber == center_profiles[0].attendance[i]) {
+                  let attendance = center_profiles[0].attendance
+                  attendance.splice(center_profiles[0].attendance.indexOf(addAttendeeForm.data.studentNumber), 1)
+
+                  const { data, error } = await supabase
+                    .from('center_profiles')
+                    .update({ attendance: attendance })
+                    .eq('id', user?.id)
+                    .select()
+                  console.log(attendance)
+                  if (error) {
+                    return message(addAttendeeForm, "Error removing attendee.")
+                  }
+                  else {
+                    return message(addAttendeeForm, "Attendee removed successfully.")
+                  }
+                }
+              }
+              return message(addAttendeeForm, "Student is  not attending.")
+            }
+          }
+        }
+      }
     }
-    else {
-        
-    }
-  }
+  },
 };

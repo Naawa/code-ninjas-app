@@ -19,7 +19,7 @@
 	on:click={() => {
 		showModal = true;
 	}}
-	class="primary-btn bold-9" >Add Attendee</button
+	class="primary-btn bold-9">Add Attendee</button
 >
 
 {#if showModal}
@@ -37,6 +37,9 @@
 			<h3>Add Attendee</h3>
 			<form method="post" use:addAttendeeEnhance>
 				<input type="text" placeholder="Scan Wristband" name="studentNumber" bind:value={$addAttendeeForm.studentNumber}>
+				{#if $addAttendeeMessage}
+					<h5>{$addAttendeeMessage}</h5>
+				{/if}
 				<div>
 					<button
 						class="primary-btn bold-9"

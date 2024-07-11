@@ -36,15 +36,15 @@
 
 			<h3>Remove Attendee</h3>
 			<form method="post" use:removeAttendeeEnhance>
-				
+				<input type="text" placeholder="Scan Wristband" name="studentNumber" bind:value={$removeAttendeeForm.studentNumber}>
 				{#if $removeAttendeeMessage}
 					<h5>{$removeAttendeeMessage}</h5>
 				{/if}
 				<div>
 					<button
-						class="caution-btn bold-9"
+						class="primary-btn bold-9"
 						type="submit"
-						formaction="/admin/manage-attendance?/removeAttendee">Remove</button
+						formaction="/admin/manage-attendance?/removeAttendee">Add</button
 					>
 				</div>
 			</form>
