@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	export let data;
 	import { blur, scale } from 'svelte/transition';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
@@ -12,6 +14,15 @@
 	} = superForm(data.addAttendeeForm);
 
 	let showModal = false;
+	let input: HTMLInputElement;
+
+	$: if(showModal) {
+		let polling = setInterval(() => {
+			if(input) {
+				input.focus()
+			}
+		}, 250)
+	}
 </script>
 
 <button
@@ -35,8 +46,9 @@
 			</button>
 
 			<h3>Add Attendee</h3>
-			<form method="post" use:addAttendeeEnhance>
-				<input type="text" placeholder="Scan Wristband" name="studentNumber" bind:value={$addAttendeeForm.studentNumber}>
+			<form autocomplete="off" method="post" use:addAttendeeEnhance>
+				<form  method="post" use:addAttendeeEnhance>
+				<input bind:this={input} type="text" placeholder="Scan Wristband" name="studentNumber" bind:value={$addAttendeeForm.studentNumber}>
 				{#if $addAttendeeMessage}
 					<h5>{$addAttendeeMessage}</h5>
 				{/if}
@@ -44,7 +56,8 @@
 					<button
 						class="primary-btn bold-9"
 						type="submit"
-						formaction="/admin/manage-attendance?/addAttendee">Add</button
+						formaction="/admin/manage-attendance?/addAttendee"
+						>Add</button
 					>
 				</div>
 			</form>

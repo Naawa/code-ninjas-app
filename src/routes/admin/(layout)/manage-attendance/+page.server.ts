@@ -108,28 +108,28 @@ export const actions = {
   removeAttendee: async ({ request, locals: { supabase } }) => {
     let { data: { user } } = await supabase.auth.getUser()
 
-    const addAttendeeForm = await superValidate(request, zod(addByStudentNumberSchema));
+    const removeAttendeeForm = await superValidate(request, zod(addByStudentNumberSchema));
 
     if (user) {
-      if (!addAttendeeForm.valid) {
-        return message(addAttendeeForm, "Invalid input.")
+      if (!removeAttendeeForm.valid) {
+        return message(removeAttendeeForm, "Invalid input.")
       }
       else {
         let { data: center_profiles, error } = await supabase.from('center_profiles').select('attendance').eq('id', user?.id || "")
 
         if (error) {
-          return message(addAttendeeForm, "Server side error occurred while fetching exisitng attendance.")
+          return message(removeAttendeeForm, "Server side error occurred while fetching exisitng attendance.")
         }
         else {
           if (error) {
-            return message(addAttendeeForm, "Server side error occurred while adding attendee.")
+            return message(removeAttendeeForm, "Server side error occurred while adding attendee.")
           }
           else if (center_profiles) {
             if (center_profiles[0].attendance) {
               for (let i = 0; i < center_profiles[0].attendance.length; i++) {
-                if (addAttendeeForm.data.studentNumber == center_profiles[0].attendance[i]) {
+                if (removeAttendeeForm.data.studentNumber == center_profiles[0].attendance[i]) {
                   let attendance = center_profiles[0].attendance
-                  attendance.splice(center_profiles[0].attendance.indexOf(addAttendeeForm.data.studentNumber), 1)
+                  attendance.splice(center_profiles[0].attendance.indexOf(removeAttendeeForm.data.studentNumber), 1)
 
                   const { data, error } = await supabase
                     .from('center_profiles')
@@ -138,14 +138,14 @@ export const actions = {
                     .select()
                   console.log(attendance)
                   if (error) {
-                    return message(addAttendeeForm, "Error removing attendee.")
+                    return message(removeAttendeeForm, "Error removing attendee.")
                   }
                   else {
-                    return message(addAttendeeForm, "Attendee removed successfully.")
+                    return message(removeAttendeeForm, "Attendee removed successfully.")
                   }
                 }
               }
-              return message(addAttendeeForm, "Student is  not attending.")
+              return message(removeAttendeeForm, "Student is  not attending.")
             }
           }
         }

@@ -12,6 +12,15 @@
 	} = superForm(data.removeAttendeeForm);
 
 	let showModal = false;
+	let input: HTMLInputElement;
+
+	$: if(showModal) {
+		let polling = setInterval(() => {
+			if(input) {
+				input.focus()
+			}
+		}, 250)
+	}
 </script>
 
 <button
@@ -35,8 +44,8 @@
 			</button>
 
 			<h3>Remove Attendee</h3>
-			<form method="post" use:removeAttendeeEnhance>
-				<input type="text" placeholder="Scan Wristband" name="studentNumber" bind:value={$removeAttendeeForm.studentNumber}>
+			<form autocomplete="off" method="post" use:removeAttendeeEnhance>
+				<input bind:this={input} type="text" placeholder="Scan Wristband" name="studentNumber" bind:value={$removeAttendeeForm.studentNumber}>
 				{#if $removeAttendeeMessage}
 					<h5>{$removeAttendeeMessage}</h5>
 				{/if}
