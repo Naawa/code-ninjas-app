@@ -42,9 +42,9 @@
 				{/if}
 				<div>
 					<button
-						class="primary-btn bold-9"
+						class="caution-btn bold-9"
 						type="submit"
-						formaction="/admin/manage-attendance?/removeAttendee">Add</button
+						formaction="/admin/manage-attendance?/removeAttendee">Remove</button
 					>
 				</div>
 			</form>

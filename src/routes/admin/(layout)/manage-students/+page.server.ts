@@ -35,7 +35,6 @@ export const load = (async ({ locals: { supabase, safeGetSession } }) => {
 export const actions = {
   addStudent: async ({ request, locals: { supabase } }) => {
     const addStudentForm = await superValidate(request, zod(addStudentSchema));
-    console.log(addStudentForm.data)
     if (!addStudentForm.valid) {
       return message(addStudentForm, "Form is invalid.")
     }
@@ -84,7 +83,7 @@ export const actions = {
   },
   removeStudent: async ({ request, locals: { supabase } }) => {
     const removeStudentForm = await superValidate(request, zod(removeStudentSchema));
-
+    console.log("data", removeStudentForm.data)
     if (!removeStudentForm.valid) {
       return message(removeStudentForm, "Form is invalid.")
     }
@@ -101,7 +100,6 @@ export const actions = {
         )
 
         if (error) {
-          console.log(students)
           return message(removeStudentForm, "Student does not exist.")
         }
         else {

@@ -69,6 +69,7 @@ export const actions = {
         return message(form, 'Invalid credentials.')
       }
       else if(students) {
+        console.log(students)
         if(students[0].email) {
           let { data, error } = await supabase.auth.signInWithPassword({
             email: students[0].email,
@@ -83,6 +84,8 @@ export const actions = {
             })
             throw redirect(302, '/student/dashboard')
           }
+        } else {
+          return message(form, "Invalid credentials.")
         }
       }
     }

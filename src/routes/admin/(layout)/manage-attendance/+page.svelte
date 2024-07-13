@@ -15,7 +15,7 @@
         <AddAttendee {data}></AddAttendee>
 		<RemoveAttendee {data}></RemoveAttendee>
     </span>
-	<DisplayAttendance {attendingStudents}></DisplayAttendance>
+	<DisplayAttendance {data} {attendingStudents}></DisplayAttendance>
 </section>
 
 <style lang="scss">
