@@ -80,5 +80,7 @@
 		flex-direction: column;
 		gap: 2em;
 		align-items: center;
+		justify-content: center;
+		height: 100vh;
 	}
 </style>
