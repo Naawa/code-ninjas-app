@@ -83,7 +83,6 @@ export const actions = {
   },
   removeStudent: async ({ request, locals: { supabase } }) => {
     const removeStudentForm = await superValidate(request, zod(removeStudentSchema));
-    console.log("data", removeStudentForm.data)
     if (!removeStudentForm.valid) {
       return message(removeStudentForm, "Form is invalid.")
     }

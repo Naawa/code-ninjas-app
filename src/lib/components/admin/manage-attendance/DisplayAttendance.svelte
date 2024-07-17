@@ -14,6 +14,7 @@
 </script>
 
 <span>
+	<a href="/timer" class="bold-9 tertiary-btn" target="_blank">Open Timer</a>
 	{#each attendingStudents as student}
 		<div class="rounded-glass-container">
 			<h3>{student.name}</h3>
@@ -30,6 +31,9 @@
 
 <style lang="scss">
 	span {
+		display: flex;
+		flex-direction: column;
+		gap: 2em;
 		div {
 			display: flex;
 			flex-direction: column;

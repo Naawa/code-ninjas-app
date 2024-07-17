@@ -72,6 +72,24 @@ button {
     }
 }
 
+.tertiary-btn {
+    font-weight: 900;
+    font-size: 1.25em;
+    padding: 0.58em 1em 0.4em;
+    border-radius: 0.5em;
+    background-color: #ffffff;
+    color: #00325c;
+    text-align: center;
+    min-width: 8em;
+    box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.25);
+    border: solid 0.25em #00325c;
+
+    &:hover {
+        background-color: #ffffffe1;
+    }
+}
+
+
 .round-left {
     height: 3.5em;
     width: 3.5em;

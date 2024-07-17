@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	export let data;
 	import { blur, scale } from 'svelte/transition';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
+	export let data;
 
 	const {
 		form: addAttendeeForm,
@@ -15,13 +15,17 @@
 
 	let showModal = false;
 	let input: HTMLInputElement;
+	let polling: NodeJS.Timeout
 
 	$: if(showModal) {
-		let polling = setInterval(() => {
+		polling = setInterval(() => {
 			if(input) {
 				input.focus()
 			}
 		}, 250)
+	}
+	else {
+		clearInterval(polling)
 	}
 </script>
 

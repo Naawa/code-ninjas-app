@@ -136,7 +136,6 @@ export const actions = {
                     .update({ attendance: attendance })
                     .eq('id', user?.id)
                     .select()
-                  console.log(attendance)
                   if (error) {
                     return message(removeAttendeeForm, "Error removing attendee.")
                   }

@@ -1,8 +1,7 @@
-<script>
-	import AddAttendee from '$lib/components/admin/manage-attendance/AddAttendee.svelte';
+<script lang="ts">
 	import DisplayAttendance from '$lib/components/admin/manage-attendance/DisplayAttendance.svelte';
 	import RemoveAttendee from '$lib/components/admin/manage-attendance/RemoveAttendee.svelte';
-
+	import AddAttendee from '$lib/components/admin/manage-attendance/AddAttendee.svelte';
 
 	export let data;
 
@@ -12,7 +11,7 @@
 <section>
 	<h1>Manage Attendance</h1>
 	<span>
-        <AddAttendee {data}></AddAttendee>
+		<AddAttendee {data}></AddAttendee>
 		<RemoveAttendee {data}></RemoveAttendee>
     </span>
 	<DisplayAttendance {data} {attendingStudents}></DisplayAttendance>

@@ -13,13 +13,16 @@
 
 	let showModal = false;
 	let input: HTMLInputElement;
+	let polling: NodeJS.Timeout;
 
-	$: if(showModal) {
-		let polling = setInterval(() => {
-			if(input) {
-				input.focus()
+	$: if (showModal) {
+		polling = setInterval(() => {
+			if (input) {
+				input.focus();
 			}
-		}, 250)
+		}, 250);
+	} else {
+		clearInterval(polling);
 	}
 </script>
 
@@ -45,7 +48,13 @@
 
 			<h3>Remove Attendee</h3>
 			<form autocomplete="off" method="post" use:removeAttendeeEnhance>
-				<input bind:this={input} type="text" placeholder="Scan Wristband" name="studentNumber" bind:value={$removeAttendeeForm.studentNumber}>
+				<input
+					bind:this={input}
+					type="text"
+					placeholder="Scan Wristband"
+					name="studentNumber"
+					bind:value={$removeAttendeeForm.studentNumber}
+				/>
 				{#if $removeAttendeeMessage}
 					<h5>{$removeAttendeeMessage}</h5>
 				{/if}
