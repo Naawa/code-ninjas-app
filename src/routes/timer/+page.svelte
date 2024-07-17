@@ -21,7 +21,7 @@
 	}
 
 	const studentProfiles = supabase
-		.channel('student-profiles-for-center-update-channel')
+		.channel('student-profiles-update-channel')
 		.on(
 			'postgres_changes',
 			{ event: 'UPDATE', schema: 'public', table: 'student_profiles', filter: `center=eq.${data.center?.location}` },
@@ -33,7 +33,7 @@
 		.subscribe();
 
 	const centerProfiles = supabase
-		.channel('center-profiles-for-center-update-channel')
+		.channel('center-profiles-update-channel')
 		.on(
 			'postgres_changes',
 			{ event: 'UPDATE', schema: 'public', table: 'center_profiles', filter: `location=eq.${data.center?.location}` },
