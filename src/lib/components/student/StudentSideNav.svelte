@@ -14,23 +14,13 @@
 		</span>
 	</a>
 	<a
-		href="/student/attendance"
-		class="color-link"
-		class:active={$page.url.pathname.startsWith('/student/layout/attendance')}
-	>
-		<span>
-			<img src="/sessions.png" alt="" />
-			<h4>Attendance</h4>
-		</span>
-	</a>
-	<a
 		href="/student/profile"
 		class="color-link"
 		class:active={$page.url.pathname.startsWith('/student/layout/profile')}
 	>
 		<span>
 			<img src="/profile.png" alt="" />
-			<h4>Students</h4>
+			<h4>Profile</h4>
 		</span>
 	</a>
 	<a
@@ -44,6 +34,16 @@
 		</span>
 	</a>
 	<a
+		href="/student/inventory"
+		class="color-link"
+		class:active={$page.url.pathname.startsWith('/student/layout/inventory')}
+	>
+		<span>
+			<img src="/settings.png" alt="" />
+			<h4>Inventory</h4>
+		</span>
+	</a>
+	<a
 		href="/student/leaderboard"
 		class="color-link"
 		class:active={$page.url.pathname.startsWith('/student/layout/leaderboard')}
@@ -51,16 +51,6 @@
 		<span>
 			<img src="/leaderboard.png" alt="" />
 			<h4>Leaderboard</h4>
-		</span>
-	</a>
-	<a
-		href="/student/settings"
-		class="color-link"
-		class:active={$page.url.pathname.startsWith('/student/layout/settings')}
-	>
-		<span>
-			<img src="/settings.png" alt="" />
-			<h4>Settings</h4>
 		</span>
 	</a>
 </div>
