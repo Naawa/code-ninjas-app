@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { invalidateAll } from '$app/navigation';
 	import DisplayNameTags from '$lib/components/timer/DisplayNameTags.svelte';
+	import Timer from '$lib/components/timer/Timer.svelte';
 	import type { Database } from '$lib/db/supabase.js';
 
 	export let data;
@@ -68,4 +69,16 @@
 </script>
 
 
-<DisplayNameTags {attendeeProfiles}></DisplayNameTags>
+<section>
+	<Timer></Timer>
+	<DisplayNameTags {attendeeProfiles}></DisplayNameTags>
+</section>
+
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 2em;
+		align-items: center;
+	}
+</style>
