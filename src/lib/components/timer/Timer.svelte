@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+
 	// Date
 	let now = new Date();
 
@@ -83,7 +85,9 @@
 	}
 
 	// Update Time
-	$: timer = setInterval(updateTimer, 1000);
+	$: if (browser) {
+		timer = setInterval(updateTimer, 1000);
+	}
 
 	// Update Session
 	$: if (session) {
@@ -97,7 +101,7 @@
 			timeBlock = 'Home Time!';
 		}
 	}
-	console.log(now.toLocaleTimeString())
+	console.log(now.toLocaleTimeString());
 </script>
 
 <div class="rounded-glass-container">
@@ -125,8 +129,8 @@
 			<span>
 				{#if hourHand}
 					<h3>{hourHand}</h3>
+					<h3>:</h3>
 				{/if}
-				<h3>:</h3>
 				{#if minuteHand != undefined}
 					<h3>{minuteHand}</h3>
 				{:else if minuteHand == 0}
