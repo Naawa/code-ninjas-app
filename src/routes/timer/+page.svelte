@@ -66,11 +66,13 @@
 	}
 
 	updateAttendance();
+
+	let timerBg: string
 </script>
 
 
 <section>
-	<Timer></Timer>
+	<Timer bind:timeBlock={timerBg}></Timer>
 	<DisplayNameTags {attendeeProfiles}></DisplayNameTags>
 </section>
 
