@@ -20,9 +20,11 @@
         height: 5em;
 
         img {
-            height: 2em;
-            width: 2em;
-            border-radius: 1em;
+            height: 2.75em;
+            width: 2.75em;
+            border-radius: 100%;
+            background-color: white;
+            border: solid 0.2em rgb(172, 192, 222);
         }
 
         h3 {

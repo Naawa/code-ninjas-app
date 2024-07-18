@@ -87,7 +87,8 @@
 	// Update Time
 	$: if (browser) {
 		timer = setInterval(updateTimer, 1000);
-	}
+		console.log(now.toLocaleTimeString());
+	}	
 
 	// Update Session
 	$: if (session) {
@@ -101,7 +102,6 @@
 			timeBlock = 'Home Time!';
 		}
 	}
-	console.log(now.toLocaleTimeString());
 </script>
 
 <div class="rounded-glass-container">
@@ -154,8 +154,9 @@
 		height: fit-content;
 		justify-content: center;
 		align-items: center;
-		border-radius: 2em;
+		border-radius: 1em;
 		padding: 2em;
+		min-width: 16em;
 		gap: 2em;
 
 		div {
