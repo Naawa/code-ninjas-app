@@ -13,8 +13,10 @@
 	} = superForm(data.removeAttendeeForm);
 </script>
 
-<span>
-	<a href="/timer" class="bold-9 tertiary-btn" target="_blank">Open Timer</a>
+<div>
+	<span>
+		<a href="/timer" class="bold-9 tertiary-btn" target="_blank">Open Timer</a><a href="/admin/manage-attendance/configure-timer" class="bold-9 tertiary-btn">Configure Timer</a>
+	</span>
 	{#each attendingStudents as student}
 		<div class="rounded-glass-container">
 			<h3>{student.name}</h3>
@@ -27,13 +29,19 @@
 			</form>
 		</div>
 	{/each}
-</span>
+	</div>
 
 <style lang="scss">
-	span {
+	div {
 		display: flex;
 		flex-direction: column;
 		gap: 2em;
+
+		span {
+			display: flex;
+			gap: 1em;
+		}
+
 		div {
 			display: flex;
 			flex-direction: column;

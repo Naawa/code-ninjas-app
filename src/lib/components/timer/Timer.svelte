@@ -20,7 +20,7 @@
 	export let timeBlock: string;
 	let minutesLeftInHour: number;
 	let secondsLeftInMinute: number;
-	let timer: NodeJS.Timeout | number;
+	let timer: NodeJS.Timeout | number | void | string | undefined;
 
 	// Activation
 	function updateTimer() {
@@ -82,6 +82,7 @@
 		} else {
 			ampm = 'AM';
 		}
+		timer = clearInterval(timer as number)
 	}
 
 	// Update Time
@@ -131,12 +132,12 @@
 					<h3>{hourHand}</h3>
 					<h3>:</h3>
 				{/if}
-				{#if minuteHand != undefined}
+				{#if minuteHand != undefined && minuteHand > 10}
 					<h3>{minuteHand}</h3>
+				{:else if minuteHand < 10 && minuteHand > 0}
+					<h3>0{minuteHand}</h3> 
 				{:else if minuteHand == 0}
 					<h3>00</h3>
-				{:else if minuteHand < 10}
-					<h3>0{minuteHand}</h3>
 				{/if}
 			</span>
 			{#if ampm}
