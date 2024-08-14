@@ -8,6 +8,10 @@ input, select, option, textarea {
     font-weight: 600;
     appearance: none;
     font-size: 0.9em;
+
+    &:hover {
+        background-color: #e3e3e3;
+    }
 }
 
 input:-webkit-autofill,

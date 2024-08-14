@@ -1,10 +1,11 @@
 <script>
 	import ModifyTimerBackground from "./modify/ModifyTimerBackground.svelte";
 
+    export let data
 </script>
 
 <section class="rounded-glass-container">
-    <ModifyTimerBackground></ModifyTimerBackground>
+    <ModifyTimerBackground {data}></ModifyTimerBackground>
 </section>
 
 <style lang="scss">
