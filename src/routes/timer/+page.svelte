@@ -80,7 +80,7 @@
 	section {
 		display: flex;
 		flex-direction: column;
-		gap: 2em;
+		gap: 1em;
 		align-items: center;
 		justify-content: center;
 		min-height: 100vh;

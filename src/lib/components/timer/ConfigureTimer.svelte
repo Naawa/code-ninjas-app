@@ -1,18 +1,22 @@
 <script>
-	import ModifyTimerBackground from "./modify/ModifyTimerBackground.svelte";
-
-    export let data
+	import ModifyExplorationBackground from "./modify/ModifyExplorationBackground.svelte";
+import ModifyTrainingBackground from "./modify/ModifyTrainingBackground.svelte";
+	import ModifyTypingBackground from "./modify/ModifyTypingBackground.svelte";
+	export let data;
 </script>
 
 <section class="rounded-glass-container">
-    <ModifyTimerBackground {data}></ModifyTimerBackground>
+    <ModifyTrainingBackground {data}></ModifyTrainingBackground>
+	<ModifyTypingBackground {data}></ModifyTypingBackground>
+	<ModifyExplorationBackground {data}></ModifyExplorationBackground>
 </section>
 
 <style lang="scss">
     section {
         display: flex;
 		gap: 1em;
-		flex-direction: column;
+		overflow-y: scroll;
+		flex-wrap: wrap;
 		width: 100%;
 		margin: 0 3em 2em;
 		padding: 4em;

@@ -13,7 +13,6 @@
 	let uploading = false;
 	let files: FileList;
 
-
 	const uploadImage = async () => {
 		try {
 			uploading = true;
@@ -24,19 +23,25 @@
 
 			const file = files[0];
 			const fileExt = file.name.split('.').pop();
-			const filePath = `${admin.id}/timerbg.${fileExt}`;
+			const timestamp = new Date().toTimeString();
+			const filePath = `${admin.id}/training-bg-${timestamp}.${fileExt}`;
 
 			const { data, error } = await supabase.storage.from('images').upload(filePath, file, {
 				upsert: false
 			});
-			console.log(data);
+
 			if (error) {
 				throw error;
+			} else {
+				backgroundImagePath = filePath;
+				const { data, error } = await supabase
+					.from('center_profiles')
+					.update({ training_bg_src: backgroundImagePath })
+					.eq('id', admin.id)
+					.select();
 			}
-			backgroundImagePath = filePath
 		} catch (error) {
 			if (error instanceof Error) {
-				console.log(error);
 				throw new Error(error.message);
 			}
 		} finally {
@@ -45,43 +50,54 @@
 	};
 
 	async function getPreviewImage() {
-		const { data } = await supabase.storage.from('images').getPublicUrl(`${admin.id}/timerbg.jpg`);
+		let { data: center_profiles, error } = await supabase
+			.from('center_profiles')
+			.select('training_bg_src');
 
-		if(data) {
-			console.log(data.publicUrl)
-			return data.publicUrl
+		if (center_profiles.at(1).training_bg_src) {
+			const { data } = await supabase.storage
+				.from('images')
+				.getPublicUrl(center_profiles.at(1).training_bg_src);
+			return data.publicUrl;
 		}
+		return null;
 	}
 </script>
 
-<h3>Timer Preview</h3>
-{#await getPreviewImage()}
-	<h4>Loading preview...</h4>
-{:then previewImageURL} 
-	<img src={previewImageURL} alt="img">
-{/await}
+<section>
+	<h3>Training Background</h3>
+	{#if !uploading}
+		{#await getPreviewImage()}
+			<h4>Loading preview...</h4>
+		{:then previewImageURL}
+			{#if previewImageURL}
+				<img id="preview" src={previewImageURL} alt="img" />
+			{:else}
+				<h5>Training background not set.</h5>
+			{/if}
+		{/await}
+	{/if}
 
-<button
-	in:scale
-	on:click={() => {
-		showModal = true;
-	}}
-	class="modify-btn bold-9">Modify Timer Background</button
->
+	<button
+		in:scale
+		on:click={() => {
+			showModal = true;
+		}}
+		class="modify-btn bold-9">Modify</button
+	>
 
-{#if showModal}
-	<span>
-		<div transition:blur class="rounded-glass-container">
-			<button
-				class="close-btn"
-				on:click={() => {
-					showModal = false;
-				}}
-			>
-				<img src="/close-login.png" alt="" />
-			</button>
-			<h3>Upload New Background</h3>
-			<form method="post">
+	{#if showModal}
+		<span>
+			<div transition:blur class="rounded-glass-container">
+				<button
+					class="close-btn"
+					on:click={() => {
+						showModal = false;
+					}}
+				>
+					<img src="/close-login.png" alt="" />
+				</button>
+				<h3>Upload New Background</h3>
 				{#if uploading}
 					<h4>Uploading...</h4>
 				{:else}
@@ -91,7 +107,10 @@
 							id="single"
 							accept="image/*"
 							bind:files
-							on:change={uploadImage}
+							on:change={() => {
+								uploadImage();
+								showModal = false;
+							}}
 							disabled={uploading}
 						/>
 						Choose Image
@@ -103,16 +122,24 @@
 					name="timerbgurl"
 					bind:value={backgroundImagePath}
 				/>
-				<button class="primary-btn">Upload</button>
-			</form>
-		</div>
-	</span>
-{/if}
+			</div>
+		</span>
+	{/if}
+</section>
 
 <style lang="scss">
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
 	#preview {
 		aspect-ratio: 16/9;
-		min-height: 200px;
+		max-width: 250px;
+	}
+
+	button {
+		width: fit-content;
 	}
 	span {
 		position: absolute;
@@ -148,28 +175,19 @@
 				}
 			}
 
-			form {
+			div {
 				display: flex;
-				justify-content: center;
-				align-items: center;
-				flex-direction: column;
+				flex-direction: row;
+				background-image: none;
+				box-shadow: none;
+				padding: 0;
 				gap: 1em;
-				width: 100%;
+				border: none;
+			}
 
-				div {
-					display: flex;
-					flex-direction: row;
-					background-image: none;
-					box-shadow: none;
-					padding: 0;
-					gap: 1em;
-					border: none;
-				}
-
-				label {
-					input {
-						display: none;
-					}
+			label {
+				input {
+					display: none;
 				}
 			}
 		}
