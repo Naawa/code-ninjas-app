@@ -54,10 +54,10 @@
 			.from('center_profiles')
 			.select('training_bg_src');
 
-		if (center_profiles.at(1).training_bg_src) {
+		if (center_profiles.at(0).training_bg_src) {
 			const { data } = await supabase.storage
 				.from('images')
-				.getPublicUrl(center_profiles.at(1).training_bg_src);
+				.getPublicUrl(center_profiles.at(0).training_bg_src);
 			return data.publicUrl;
 		}
 		return null;

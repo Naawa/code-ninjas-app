@@ -88,7 +88,6 @@
 	// Update Time
 	$: if (browser) {
 		timer = setInterval(updateTimer, 1000);
-		console.log(now.toLocaleTimeString());
 	}
 
 	// Update Session
@@ -100,7 +99,7 @@
 		} else if (minutesLeftInHour <= 10 && minutesLeftInHour >= 1 && secondsLeftInMinute <= 59) {
 			timeBlock = 'Ninja Exploration!';
 		} else if (minutesLeftInHour <= 1 && secondsLeftInMinute <= 59) {
-			timeBlock = 'Home Time!';
+			timeBlock = 'Typing!';
 		}
 	}
 </script>

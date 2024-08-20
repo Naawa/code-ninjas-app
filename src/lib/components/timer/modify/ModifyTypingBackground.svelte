@@ -51,11 +51,11 @@
 		let { data: center_profiles, error } = await supabase
 			.from('center_profiles')
 			.select('typing_bg_src');
-
-		if (center_profiles.at(1).typing_bg_src) {
+			
+		if (center_profiles.at(0).typing_bg_src) {
 			const { data } = await supabase.storage
 				.from('images')
-				.getPublicUrl(center_profiles.at(1).typing_bg_src);
+				.getPublicUrl(center_profiles.at(0).typing_bg_src);
 			return data.publicUrl;
 		}
 		return null;

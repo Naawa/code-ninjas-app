@@ -40,6 +40,11 @@
 			{ event: 'UPDATE', schema: 'public', table: 'center_profiles', filter: `location=eq.${data.center?.location}` },
 			(payload) => {
 				attendance = payload.new.attendance;
+				if (center) {
+					center.typing_bg_src = payload.new.typing_bg_src
+					center.training_bg_src = payload.new.training_bg_src_bg_src
+					center.exploration_bg_src = payload.new.exploration_bg_src
+				}
 				updateAttendance();
 			}
 		)
@@ -67,16 +72,40 @@
 
 	updateAttendance();
 
-	let timerBg: string
+	function getTimerBackground(path: string) {
+		const { data } = supabase.storage
+			.from('images')
+			.getPublicUrl(path);
+			return data.publicUrl;
+	}
+
+	let timeblock: string = ""
+	let timerbg: string = ""
+
+	$: if(timeblock == "Typing!") {
+		timerbg = getTimerBackground(center?.typing_bg_src || "")
+	}
+	else if(timeblock == "Ninja Training!") {
+		timerbg = getTimerBackground(center?.training_bg_src || "")
+	}
+	else if(timeblock == "Ninja Exploration!") {
+		timerbg = getTimerBackground(center?.exploration_bg_src || "")
+	}
+	else {
+		timerbg = getTimerBackground(center?.typing_bg_src || "")
+	}
 </script>
 
 
 <section>
-	<Timer bind:timeBlock={timerBg}></Timer>
+	{#if timerbg}
+		<img src={timerbg} alt="Timer background.">
+	{/if}
+	<Timer bind:timeBlock={timeblock}></Timer>
 	<DisplayNameTags {attendeeProfiles}></DisplayNameTags>
 </section>
 
-<style>
+<style lang="scss">
 	section {
 		display: flex;
 		flex-direction: column;
@@ -84,5 +113,13 @@
 		align-items: center;
 		justify-content: center;
 		min-height: 100vh;
+
+		
+		img {
+			position: absolute;
+			z-index: -1;
+			height: 100vh;
+			width: 100vw;
+		}
 	}
 </style>
