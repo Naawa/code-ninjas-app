@@ -26,19 +26,32 @@
 			const timestamp = new Date().toTimeString();
 			const filePath = `${admin.id}/exploration-bg-${timestamp}.${fileExt}`;
 
-			const { data, error } = await supabase.storage.from('images').upload(filePath, file, {
-				upsert: false
-			});
-			
-			if (error) {
-				throw error;
-			} else {
-				backgroundImagePath = filePath;
-				const { data, error } = await supabase
-					.from('center_profiles')
-					.update({ exploration_bg_src: backgroundImagePath })
-					.eq('id', admin.id)
-					.select();
+			let { data: center_profiles, error } = await supabase
+				.from('center_profiles')
+				.select('exploration_bg_src')
+				.eq('id', admin.id);
+
+			if (center_profiles) {
+				const { data, error } = await supabase.storage
+					.from('images')
+					.remove([center_profiles.at(0).exploration_bg_src]);
+
+				if (data) {
+					const { data, error } = await supabase.storage.from('images').upload(filePath, file, {
+						upsert: false
+					});
+				}
+
+				if (error) {
+					throw error;
+				} else {
+					backgroundImagePath = filePath;
+					const { data, error } = await supabase
+						.from('center_profiles')
+						.update({ exploration_bg_src: backgroundImagePath })
+						.eq('id', admin.id)
+						.select();
+				}
 			}
 		} catch (error) {
 			if (error instanceof Error) {
@@ -52,79 +65,80 @@
 	async function getPreviewImage() {
 		let { data: center_profiles, error } = await supabase
 			.from('center_profiles')
-			.select('exploration_bg_src');
+			.select('exploration_bg_src')
+			.eq('id', admin.id);
 
-		if(center_profiles.at(0).exploration_bg_src) {
+		if (center_profiles.at(0).exploration_bg_src) {
 			const { data } = await supabase.storage
-			.from('images')
-			.getPublicUrl(center_profiles.at(0).exploration_bg_src);
+				.from('images')
+				.getPublicUrl(center_profiles.at(0).exploration_bg_src);
 			return data.publicUrl;
 		}
-		return null
+		return null;
 	}
 </script>
 
 <section>
 	<h3>Exploration Background</h3>
-{#if !uploading}
-	{#await getPreviewImage()}
-		<h4>Loading preview...</h4>
-	{:then previewImageURL}
-		{#if previewImageURL}
-			<img id="preview" src={previewImageURL} alt="img" />
-		{:else}
-			<h5>Exploration background not set.</h5>
-		{/if}
-	{/await}
-{/if}
-
-<button
-	in:scale
-	on:click={() => {
-		showModal = true;
-	}}
-	class="modify-btn bold-9">Modify</button
->
-
-{#if showModal}
-	<span>
-		<div transition:blur class="rounded-glass-container">
-			<button
-				class="close-btn"
-				on:click={() => {
-					showModal = false;
-				}}
-			>
-				<img src="/close-login.png" alt="" />
-			</button>
-			<h3>Upload New Background</h3>
-			{#if uploading}
-				<h4>Uploading...</h4>
+	{#if !uploading}
+		{#await getPreviewImage()}
+			<h4>Loading preview...</h4>
+		{:then previewImageURL}
+			{#if previewImageURL}
+				<img id="preview" src={previewImageURL} alt="img" />
 			{:else}
-				<label class="tertiary-btn">
-					<input
-						type="file"
-						id="single"
-						accept="image/*"
-						bind:files
-						on:change={() => {
-							uploadImage();
-							showModal = false;
-						}}
-						disabled={uploading}
-					/>
-					Choose Image
-				</label>
+				<h5>Exploration background not set.</h5>
 			{/if}
-			<input
-				type="text"
-				style="display: none;"
-				name="timerbgurl"
-				bind:value={backgroundImagePath}
-			/>
-		</div>
-	</span>
-{/if}
+		{/await}
+	{/if}
+
+	<button
+		in:scale
+		on:click={() => {
+			showModal = true;
+		}}
+		class="modify-btn bold-9">Modify</button
+	>
+
+	{#if showModal}
+		<span>
+			<div transition:blur class="rounded-glass-container">
+				<button
+					class="close-btn"
+					on:click={() => {
+						showModal = false;
+					}}
+				>
+					<img src="/close-login.png" alt="" />
+				</button>
+				<h3>Upload New Background</h3>
+				{#if uploading}
+					<h4>Uploading...</h4>
+				{:else}
+					<label class="tertiary-btn">
+						<input
+							type="file"
+							id="single"
+							accept="image/*"
+							bind:files
+							on:change={() => {
+								uploadImage();
+								showModal = false;
+							}}
+							disabled={uploading}
+						/>
+						Choose Image
+					</label>
+				{/if}
+				<input
+					type="text"
+					style="display: none;"
+					name="timerbgurl"
+					bind:value={backgroundImagePath}
+				/>
+			</div>
+		</span>
+	{/if}
 </section>
 
 <style lang="scss">

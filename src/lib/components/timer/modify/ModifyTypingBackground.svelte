@@ -24,19 +24,33 @@
 			const timestamp = new Date().toTimeString();
 			const filePath = `${admin.id}/typing-bg-${timestamp}.${fileExt}`;
 
-			const { data, error } = await supabase.storage.from('images').upload(filePath, file, {
-				upsert: false
-			});
+			let { data: center_profiles, error } = await supabase
+				.from('center_profiles')
+				.select('typing_bg_src')
+				.eq('id', admin.id);
 
-			if (error) {
-				throw error;
-			} else {
-				backgroundImagePath = filePath;
-				const { data, error } = await supabase
-					.from('center_profiles')
-					.update({ typing_bg_src: backgroundImagePath })
-					.eq('id', admin.id)
-					.select();
+			if (center_profiles) {
+				const { data, error } = await supabase.storage
+					.from('images')
+					.remove([center_profiles.at(0).typing_bg_src]);
+
+				
+				if (data) {
+					const { data, error } = await supabase.storage.from('images').upload(filePath, file, {
+						upsert: false
+					});
+				}
+
+				if (error) {
+					throw error;
+				} else {
+					backgroundImagePath = filePath;
+					const { data, error } = await supabase
+						.from('center_profiles')
+						.update({ typing_bg_src: backgroundImagePath })
+						.eq('id', admin.id)
+						.select();
+				}
 			}
 		} catch (error) {
 			if (error instanceof Error) {
@@ -50,8 +64,9 @@
 	async function getPreviewImage() {
 		let { data: center_profiles, error } = await supabase
 			.from('center_profiles')
-			.select('typing_bg_src');
-			
+			.select('typing_bg_src')
+			.eq('id', admin.id);
+
 		if (center_profiles.at(0).typing_bg_src) {
 			const { data } = await supabase.storage
 				.from('images')

@@ -82,13 +82,13 @@
 		} else {
 			ampm = 'AM';
 		}
-		timer = clearInterval(timer as number);
 	}
 
 	// Update Time
-	$: if (browser) {
+	if(browser) {
 		timer = setInterval(updateTimer, 1000);
 	}
+
 
 	// Update Session
 	$: if (session) {

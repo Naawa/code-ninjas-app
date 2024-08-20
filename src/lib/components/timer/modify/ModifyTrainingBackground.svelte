@@ -26,9 +26,22 @@
 			const timestamp = new Date().toTimeString();
 			const filePath = `${admin.id}/training-bg-${timestamp}.${fileExt}`;
 
-			const { data, error } = await supabase.storage.from('images').upload(filePath, file, {
-				upsert: false
-			});
+			let { data: center_profiles, error } = await supabase
+				.from('center_profiles')
+				.select('training_bg_src')
+				.eq('id', admin.id);
+
+			if (center_profiles) {
+				const { data, error } = await supabase.storage
+					.from('images')
+					.remove([center_profiles.at(0).training_bg_src]);
+
+				if (data) {
+					const { data, error } = await supabase.storage.from('images').upload(filePath, file, {
+						upsert: false
+					});
+				}
+			}
 
 			if (error) {
 				throw error;
@@ -52,7 +65,8 @@
 	async function getPreviewImage() {
 		let { data: center_profiles, error } = await supabase
 			.from('center_profiles')
-			.select('training_bg_src');
+			.select('training_bg_src')
+			.eq('id', admin.id);
 
 		if (center_profiles.at(0).training_bg_src) {
 			const { data } = await supabase.storage

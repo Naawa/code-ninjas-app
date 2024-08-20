@@ -3,4 +3,5 @@
 
 	export let data
 </script>
+
 <ConfigureTimer {data}></ConfigureTimer>
