@@ -47,7 +47,7 @@ export type Database = {
           created_at: string
           exploration_bg_src: string | null
           id: string | null
-          location: string | null
+          location: string
           training_bg_src: string | null
           typing_bg_src: string | null
         }
@@ -56,7 +56,7 @@ export type Database = {
           created_at?: string
           exploration_bg_src?: string | null
           id?: string | null
-          location?: string | null
+          location: string
           training_bg_src?: string | null
           typing_bg_src?: string | null
         }
@@ -65,7 +65,7 @@ export type Database = {
           created_at?: string
           exploration_bg_src?: string | null
           id?: string | null
-          location?: string | null
+          location?: string
           training_bg_src?: string | null
           typing_bg_src?: string | null
         }
@@ -80,11 +80,41 @@ export type Database = {
           {
             foreignKeyName: "center_profiles_location_fkey"
             columns: ["location"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "admins"
             referencedColumns: ["location"]
           },
         ]
+      }
+      shop_items: {
+        Row: {
+          centerId: string | null
+          created_at: string
+          description: string | null
+          id: number
+          imgSrc: string | null
+          name: string | null
+          price: number | null
+        }
+        Insert: {
+          centerId?: string | null
+          created_at?: string
+          description?: string | null
+          id?: number
+          imgSrc?: string | null
+          name?: string | null
+          price?: number | null
+        }
+        Update: {
+          centerId?: string | null
+          created_at?: string
+          description?: string | null
+          id?: number
+          imgSrc?: string | null
+          name?: string | null
+          price?: number | null
+        }
+        Relationships: []
       }
       student_profiles: {
         Row: {

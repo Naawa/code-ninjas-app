@@ -44,3 +44,11 @@ export const removeByStudentNumberSchema = z.object({
   studentNumber: z.string(),
   center: z.string()
 });
+
+export const addItemSchema = z.object({
+  name: z.string(),
+  price: z.number(),
+  description: z.string(),
+  imgSrc: z.string(),
+  centerId: z.string(),
+});

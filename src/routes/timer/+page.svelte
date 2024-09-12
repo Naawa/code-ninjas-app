@@ -98,8 +98,8 @@
 
 
 <section>
-	{#if timerbg}
-		<img src={timerbg} alt="Timer background.">
+	{#if timerbg.length > 0}
+		<img src={timerbg} role="presentation">
 	{/if}
 	<Timer bind:timeBlock={timeblock}></Timer>
 	<DisplayNameTags {attendeeProfiles}></DisplayNameTags>

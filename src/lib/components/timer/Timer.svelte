@@ -92,13 +92,13 @@
 
 	// Update Session
 	$: if (session) {
-		if (minutesLeftInHour <= 59 && minutesLeftInHour >= 50 && secondsLeftInMinute <= 59) {
+		if (minutesLeftInHour <= 59 && minutesLeftInHour >= 50 && secondsLeftInMinute > 0) {
 			timeBlock = 'Typing!';
-		} else if (minutesLeftInHour <= 50 && minutesLeftInHour >= 10) {
+		} else if (minutesLeftInHour <= 50 && minutesLeftInHour >= 10 && secondsLeftInMinute > 0) {
 			timeBlock = 'Ninja Training!';
-		} else if (minutesLeftInHour <= 10 && minutesLeftInHour >= 1 && secondsLeftInMinute <= 59) {
+		} else if (minutesLeftInHour <= 10 && minutesLeftInHour >= 1 && secondsLeftInMinute > 0) {
 			timeBlock = 'Ninja Exploration!';
-		} else if (minutesLeftInHour <= 1 && secondsLeftInMinute <= 59) {
+		} else if (minutesLeftInHour <= 1 && secondsLeftInMinute > 0) {
 			timeBlock = 'Typing!';
 		}
 	}
@@ -138,7 +138,7 @@
 					<h3>{minuteHand}</h3>
 				{:else if minuteHand < 10 && minuteHand > 0}
 					<h3>0{minuteHand}</h3>
-				{:else if minuteHand == 0}
+				{:else}
 					<h3>00</h3>
 				{/if}
 			</span>
